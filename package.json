@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@azure/identity": "^4.10.2",
+    "@faker-js/faker": "^9.9.0",
+    "dotenv": "^16.3.1",
+    "fast-csv": "^5.0.2",
+    "csv-parse": "^6.1.0",
+    "liquidjs": "^10.21.1",
+    "luxon": "^3.7.1",
+    "pg": "^8.16.3",
+    "ssh2-sftp-client": "^12.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
