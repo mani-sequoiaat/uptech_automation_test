@@ -38,7 +38,8 @@ async function fetchFleetRecordsForregistration(batchId) { return fetchBatchReco
 
 // Functions without batchId
 async function fetchFleetRecordsForfleet() { return fetchBatchRecords('09_fleet.sql'); }
-async function fetchFleetRecordsForfleetderegistration() { return fetchBatchRecords('10_fleet_deregistration.sql'); }
+async function fetchFleetRecordsForfleetderegistration() { return fetchBatchRecords('09a_fleet_deregistration.sql'); }
+async function fetchFleetRecordsFordeltaactiontobetaken() { return fetchBatchRecords('09b_fleet_and_s_fleet_delta_deregistration.sql'); }
 async function fetchFleetRecordsForfleethistory(fileId) { return fetchBatchRecords('11_fleet_history.sql', fileId); }
 async function fetchFleetRecordsForregistrationdeltadereg() { return fetchBatchRecords('13_registration_delta_dereg.sql'); }
 async function fetchFleetRecordsForregistrationdereg() { return fetchBatchRecords('15_registration_dereg.sql'); }
@@ -54,6 +55,7 @@ module.exports = {
   fetchFleetRecordsForSilverDeltaupdate,
   fetchFleetRecordsForfleet,
   fetchFleetRecordsForfleetderegistration,
+  fetchFleetRecordsFordeltaactiontobetaken,
   fetchFleetRecordsForfleethistory,
   fetchFleetRecordsForregistrationdelta,
   fetchFleetRecordsForregistrationdeltadereg,

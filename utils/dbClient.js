@@ -32,7 +32,9 @@ async function getDbClient() {
   if (sharedClient) return sharedClient;
 
   const credential = new DefaultAzureCredential();
-  const tokenResponse = await credential.getToken("https://ossrdbms-aad.database.windows.net");
+  const tokenResponse = await credential.getToken(
+    "https://ossrdbms-aad.database.windows.net/.default"
+  );
 
   sharedClient = new Client({
     host: process.env.DB_HOST,
