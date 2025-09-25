@@ -6,9 +6,9 @@
 
 const { getDbClient, closeDbClient } = require('./utils/dbClient');
 
-// beforeAll(async () => {
-//   await getDbClient();
-// }, 15000);
+beforeAll(async () => {
+  await getDbClient();
+}, 15000);
 
 afterAll(async () => {
   await closeDbClient();

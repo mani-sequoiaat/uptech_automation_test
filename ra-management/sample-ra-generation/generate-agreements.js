@@ -4,6 +4,7 @@ const { faker } = require('@faker-js/faker');
 const { Liquid } = require('liquidjs');
 const path = require('path');
 const { DateTime } = require('luxon');
+const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
 const inputArg = parseInt(process.argv[2], 10);
 if (isNaN(inputArg) || inputArg <= 0) {
@@ -21,27 +22,13 @@ function generateLocationGroup(index) {
     const sequenceNumber = (index % 999999) + 1;
     return `GroupFR${String(sequenceNumber).padStart(6, '0')}`;
 }
-
-// function getWeekCode(weekNumber) {
-//     return weekNumber <= 26 ? String.fromCharCode(64 + weekNumber) : String.fromCharCode(96 + (weekNumber - 26));
-// }
-
-    function getDayCode(dayNumber) {
-        return ['U', 'M', 'T', 'W', 'H', 'F', 'S'][dayNumber];
-    }
-
    
 function generateLicensePlate(seq) {
-    const now = DateTime.now();
-    const dayCode = getDayCode(now.weekday % 7); // Luxon: Monday = 1 ... Sunday = 7
     const paddedSeq = String(seq).padStart(4, '0');
     return `ADP${paddedSeq}`;
 }   
 
 function generateAgreementNumber(seq) {
-        const now = DateTime.now();
-        const dayCode = getDayCode(now.weekday % 7); // Luxon: Monday = 1 ... Sunday = 7
-        const paddedSeq = String(seq).padStart(4, '0');
         return `RA-${String(generateLicensePlate(seq))}`;
     }
 
@@ -60,24 +47,42 @@ function generateAddress2(seq) {
 }
 
 function generateCorporateNumber(seq) {
-    const now = DateTime.now();
-    const dayCode = getDayCode(now.weekday % 7); // Luxon: Monday = 1 ... Sunday = 7
-    const paddedSeq = String(seq).padStart(4, '0');
     return `CN-${String(generateLicensePlate(seq))}`;
 }
 
-// function getRandomDateTimeBetween(start, end) {
-//     const randomMillis = Math.floor(Math.random() * (end.toMillis() - start.toMillis() - 1)) + start.toMillis() + 1;
-//     return DateTime.fromMillis(randomMillis);
-// }
+async function fetchFleetRows(limit) {
+    const sqlFilePath = path.join(__dirname, 'sql', 'generate-agreements-records.sql');
+    const rawSql = fs.readFileSync(sqlFilePath, 'utf-8');
+    // Remove trailing semicolon if present
+    const cleanedSql = rawSql.trim().replace(/;$/, '');
+    const wrappedSql = `WITH q AS (${cleanedSql}) SELECT * FROM q LIMIT $1`;
 
-function generateBAgreementData(numRecords) {
+    let client;
+    try {
+        client = await getDbClient();
+    } catch (err) {
+        console.error('Error creating DB client:', err && (err.stack || err.message || err));
+        throw err;
+    }
+
+    try {
+        const res = await client.query(wrappedSql, [limit]);
+        return res.rows || [];
+    } catch (err) {
+        console.error('Error running fleet query:', err && (err.stack || err.message || err));
+        throw err;
+    }
+}
+
+function generateBAgreementData(numRecords, fleetRows = []) {
     const data = [];
     // const sampleErrorRecords = [];
     for (let i = 1; i <= numRecords; i++) {
         // console.log("am  here", i);
         // const isErrorRecord = i > numRecords - 7;
         const now = DateTime.now();
+        const threeDaysPastDate = now.minus({ days: 3 });
+        const twoDaysPastDate = now.minus({ days: 2 });
         const yesterdayDate = now.minus({ days: 1 });
         const twentyDaysFutureDate = now.plus({ days: 20 });
 
@@ -99,23 +104,50 @@ function generateBAgreementData(numRecords) {
         //     (i === numRecords - 1) ? yesterdayDate.minus({ days: 2 }).toFormat('yyyy-MM-dd HH:mm:ss')
         //                           : twentyDaysFutureDate.toFormat('yyyy-MM-dd HH:mm:ss');
 
-        const agreement_number = generateAgreementNumber(i+53);
-        const brand = rental_brand[Math.floor(Math.random() * rental_brand.length)];
-        const license_plate_number = generateLicensePlate(i+53);
-        const license_plate_state = generateSequentialState(i+53);
+    // If we have fleetRows from the DB, use them (cycle through if fewer than numRecords)
+    const fleetRow = (fleetRows && fleetRows.length > 0) ? fleetRows[(i - 1) % fleetRows.length] : null;
 
-        const make = faker.vehicle.manufacturer();
-        const model = faker.vehicle.model();
-        const rental_customer_type_id = '1';
-        const corporate_account = generateCorporateNumber(i+53);
+    const brand = fleetRow?.brand || rental_brand[Math.floor(Math.random() * rental_brand.length)];
+    const license_plate_number = fleetRow?.license_plate_number || generateLicensePlate(i + 53);
+    const license_plate_state = fleetRow?.license_plate_state || generateSequentialState(i + 53);
 
-        const checkout_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
-        const estimated_checkin_datetime = twentyDaysFutureDate.toFormat('yyyy-MM-dd HH:mm:ss');
+    // agreement_number should be RA-{license_plate_number} when license_plate_number is from DB
+    const agreement_number = fleetRow?.license_plate_number ? `RA-${String(fleetRow.license_plate_number)}` : generateAgreementNumber(i + 53);
+
+    const make = fleetRow?.make || faker.vehicle.manufacturer();
+    const model = fleetRow?.model || faker.vehicle.model();
+    const rental_customer_type_id = '1';
+    // corporate_account should be C-{license_plate_number} when license_plate_number is from DB
+    const corporate_account = fleetRow?.license_plate_number ? `CN-${String(fleetRow.license_plate_number)}` : generateCorporateNumber(i + 53);
+
+    // default datetimes
+    let checkout_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
+    const estimated_checkin_datetime = twentyDaysFutureDate.toFormat('yyyy-MM-dd HH:mm:ss');
+
+    // For the last two records, checkout_datetime should be current_date - 3
+    if (i > numRecords - 2) {
+        checkout_datetime = threeDaysPastDate.toFormat('yyyy-MM-dd HH:mm:ss');
+    }
+
+    // compute checkout fields once (prefer DB values) and reuse for estimated_checkin
+    const checkout_location_group_val = fleetRow?.location_group || `Group${generateLocationGroup(i+52)}`;
+    const checkout_location_code_val = fleetRow?.location_code || location_code_list[Math.floor(Math.random() * location_code_list.length)];
+    const checkout_location_name_val = fleetRow?.location_name || faker.location.city();
+    const checkout_address_1_val = fleetRow?.address_1 || faker.location.streetAddress();
+    const checkout_address_2_val = fleetRow?.address_2 || generateAddress2(i+52);
+    const checkout_city_val = fleetRow?.city || faker.location.city();
+    const checkout_state_val = fleetRow?.state_code || generateSequentialState(i+53);
+    const checkout_zip_val = fleetRow?.zip ? String(fleetRow.zip).substring(0, 5) : faker.location.zipCode().substring(0, 5);
         
-        const swapIndicator = Math.random() >= 0.5;
-        const swapDatetime = swapIndicator 
-            ? now.toFormat('yyyy-MM-dd HH:mm:ss') 
-            : null;
+        // Do not generate random swap datetimes for every record. Only the final record should have swap info.
+        let swapIndicator = false;
+        let swapDatetime = null;
+
+        // For the last record only, set swap_indicator true and swap_datetime = current_date - 2
+        if (i === numRecords) {
+            swapIndicator = true;
+            swapDatetime = twoDaysPastDate.toFormat('yyyy-MM-dd HH:mm:ss');
+        }
 
         const record = {
             agreement_number,
@@ -126,23 +158,23 @@ function generateBAgreementData(numRecords) {
             model,
             rental_customer_type_id,
             corporate_account,
-            checkout_location_group: `Group${generateLocationGroup(i+52)}`,
-            checkout_location_code: location_code_list[Math.floor(Math.random() * location_code_list.length)],
-            checkout_location_name: faker.location.city(),
-            checkout_address_1: faker.location.streetAddress(),
-            checkout_address_2: generateAddress2(i+52),
-            checkout_city: faker.location.city(),
-            checkout_state: generateSequentialState(i+53),
-            checkout_zip: faker.location.zipCode().substring(0, 5),
+            checkout_location_group: checkout_location_group_val,
+            checkout_location_code: checkout_location_code_val,
+            checkout_location_name: checkout_location_name_val,
+            checkout_address_1: checkout_address_1_val,
+            checkout_address_2: checkout_address_2_val,
+            checkout_city: checkout_city_val,
+            checkout_state: checkout_state_val,
+            checkout_zip: checkout_zip_val,
             checkout_datetime,
-            estimated_checkin_location_group: `Group${generateLocationGroup(i+52)}`,
-            estimated_checkin_location_code: location_code_list[Math.floor(Math.random() * location_code_list.length)],
-            estimated_checkin_location_name: faker.location.city(),
-            estimated_checkin_address_1: faker.location.streetAddress(),
-            estimated_checkin_address_2: generateAddress2(i+52),
-            estimated_checkin_city: faker.location.city(),
-            estimated_checkin_state: generateSequentialState(i+53),
-            estimated_checkin_zip: faker.location.zipCode().substring(0, 5),
+            estimated_checkin_location_group: checkout_location_group_val,
+            estimated_checkin_location_code: checkout_location_code_val,
+            estimated_checkin_location_name: checkout_location_name_val,
+            estimated_checkin_address_1: checkout_address_1_val,
+            estimated_checkin_address_2: checkout_address_2_val,
+            estimated_checkin_city: checkout_city_val,
+            estimated_checkin_state: checkout_state_val,
+            estimated_checkin_zip: checkout_zip_val,
             estimated_checkin_datetime,
 
             checkin_location_group: '',
@@ -169,9 +201,18 @@ function generateBAgreementData(numRecords) {
             swap_datetime: swapDatetime
         };
 
-        // if (isErrorRecord) {
-        //     sampleErrorRecords.push(record);
-        // }
+        // For the last two records, copy checkout info into checkin and set checkin_datetime = current_date - 1
+        if (i > numRecords - 2) {
+            record.checkin_location_group = record.checkout_location_group;
+            record.checkin_location_code = record.checkout_location_code;
+            record.checkin_location_name = record.checkout_location_name;
+            record.checkin_address_1 = record.checkout_address_1;
+            record.checkin_address_2 = record.checkout_address_2;
+            record.checkin_city = record.checkout_city;
+            record.checkin_state = record.checkout_state;
+            record.checkin_zip = record.checkout_zip;
+            record.checkin_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
+        }
 
         data.push(record);
 
@@ -185,8 +226,15 @@ function generateBAgreementData(numRecords) {
 
 async function generateAndWriteData() {
     // console.log(`Generating ${b_agreements_data_count} b_agreements records...`);
-    // const { data: b_agreement_data, sampleErrorRecords } = generateBAgreementData(b_agreements_data_count);
-    const { data: b_agreement_data } = generateBAgreementData(b_agreements_data_count);
+    // Fetch fleet rows from DB to seed fields
+    let fleetRows = [];
+    try {
+        fleetRows = await fetchFleetRows(b_agreements_data_count);
+    } catch (err) {
+        console.warn('Proceeding without DB rows due to error. Falling back to synthetic data.');
+    }
+
+    const { data: b_agreement_data } = generateBAgreementData(b_agreements_data_count, fleetRows);
     const filenameTimestamp = DateTime.now().toFormat('MM-dd-yyyy-HH-mm');
     const templateFilePath = path.join(__dirname, '../sample-ra-generation/b-agreements-pipe-template.txt');
     const outputCsvFilePath = path.join(__dirname, `../sample-ra-generation/em-ra-${filenameTimestamp}.csv`);
@@ -218,6 +266,13 @@ async function generateAndWriteData() {
         console.log('Time taken:', (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + 'ms');
     } catch (err) {
         console.error('Error generating and writing data:', err);
+    } finally {
+        // ensure DB client is closed when finished
+        try {
+            await closeDbClient();
+        } catch (e) {
+            // ignore
+        }
     }
 }
 
