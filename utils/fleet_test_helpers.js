@@ -22,7 +22,8 @@ const {
   fetchFleetRecordsForregistrationdelta,
   fetchFleetRecordsForregistrationdeltadereg,
   fetchFleetRecordsForregistration,
-  fetchFleetRecordsForregistrationdereg
+  fetchFleetRecordsForregistrationdereg,
+  fetchtodayrecords
 
 } = require('./fleetSqlRunner.js');
 
@@ -43,6 +44,7 @@ module.exports = {
   fetchFleetRecordsForregistrationdelta,
   fetchFleetRecordsForregistrationdeltadereg,
   fetchFleetRecordsForregistration,
-  fetchFleetRecordsForregistrationdereg
+  fetchFleetRecordsForregistrationdereg,
+  fetchtodayrecords
 
 };

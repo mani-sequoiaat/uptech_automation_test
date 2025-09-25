@@ -43,6 +43,7 @@ async function fetchFleetRecordsFordeltaactiontobetaken() { return fetchBatchRec
 async function fetchFleetRecordsForfleethistory(fileId) { return fetchBatchRecords('11_fleet_history.sql', fileId); }
 async function fetchFleetRecordsForregistrationdeltadereg() { return fetchBatchRecords('13_registration_delta_dereg.sql'); }
 async function fetchFleetRecordsForregistrationdereg() { return fetchBatchRecords('15_registration_dereg.sql'); }
+async function fetchtodayrecords() { return fetchBatchRecords('Check_today_records.sql'); }
 
 module.exports = {
   fetchLatestFleetFile,
@@ -60,5 +61,6 @@ module.exports = {
   fetchFleetRecordsForregistrationdelta,
   fetchFleetRecordsForregistrationdeltadereg,
   fetchFleetRecordsForregistration,
-  fetchFleetRecordsForregistrationdereg
+  fetchFleetRecordsForregistrationdereg,
+  fetchtodayrecords
 };
