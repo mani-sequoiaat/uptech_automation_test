@@ -1,8 +1,12 @@
-# Submodule internals
-fleet-management/Fleet_generate_automation_script/node_modules/
-fleet-management/Fleet_generate_automation_script/*.env
+# Ignore node_modules
+node_modules/
+fleet-management/node_modules/
 
-# Main repo generated / local files
+# Ignore generated files
 fleet-management/generated-fleet-files/
 fleet-management/coverage/
-fleet-management/.env
+fleet-management/*.env
+
+# Ignore submodule internals
+fleet-management/Fleet_generate_automation_script/node_modules/
+fleet-management/Fleet_generate_automation_script/*.env
