@@ -1,6 +1,7 @@
 # Dependencies
 /node_modules
 /fleet-management/node_modules
+/fleet-management/Fleet_generate_automation_script/node_modules
 
 # Environment variables
 .env
