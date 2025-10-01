@@ -1,12 +1,8 @@
-# Ignore node_modules
-node_modules/
-fleet-management/node_modules/
-
-# Ignore generated files
-fleet-management/generated-fleet-files/
-fleet-management/coverage/
-fleet-management/*.env
-
-# Ignore submodule internals
+# Ignore submodule internals you don't want tracked
 fleet-management/Fleet_generate_automation_script/node_modules/
 fleet-management/Fleet_generate_automation_script/*.env
+fleet-management/Fleet_generate_automation_script/generated-fleet-files/
+
+# Ignore parent repo files you don't want tracked
+fleet-management/coverage/
+fleet-management/generated-fleet-files/
