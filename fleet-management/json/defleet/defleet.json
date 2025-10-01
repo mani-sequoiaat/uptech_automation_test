@@ -1,0 +1,92 @@
+[
+  {
+    "license_plate_number": "AFF0091",
+    "license_plate_state": "SD",
+    "year": "2025",
+    "make": "Mercedes Benz",
+    "model": "Colorado",
+    "color": "lime",
+    "vin": "3VLR9A0365FL77434"
+  },
+  {
+    "license_plate_number": "AFF0092",
+    "license_plate_state": "TN",
+    "year": "2026",
+    "make": "Rolls Royce",
+    "model": "ATS",
+    "color": "purple",
+    "vin": "HCCMDWB4RFYU11711"
+  },
+  {
+    "license_plate_number": "AFF0093",
+    "license_plate_state": "TX",
+    "year": "2026",
+    "make": "Ferrari",
+    "model": "Model X",
+    "color": "yellow",
+    "vin": "EZG3FAVN7LUL52664"
+  },
+  {
+    "license_plate_number": "AFF0094",
+    "license_plate_state": "UT",
+    "year": "2026",
+    "make": "Citroën",
+    "model": "Taurus",
+    "color": "plum",
+    "vin": "76FLSEXVCJJE77921"
+  },
+  {
+    "license_plate_number": "AFF0095",
+    "license_plate_state": "VT",
+    "year": "2024",
+    "make": "Rivian",
+    "model": "911",
+    "color": "indigo",
+    "vin": "U4GEJMPRC7HS38072"
+  },
+  {
+    "license_plate_number": "AFF0096",
+    "license_plate_state": "VA",
+    "year": "2025",
+    "make": "Cadillac",
+    "model": "Expedition",
+    "color": "yellow",
+    "vin": "RLRN5S0G6RA118700"
+  },
+  {
+    "license_plate_number": "AFF0097",
+    "license_plate_state": "WA",
+    "year": "2026",
+    "make": "Kia",
+    "model": "Camaro",
+    "color": "blue",
+    "vin": "LPSUXFMCAKKY02826"
+  },
+  {
+    "license_plate_number": "AFF0098",
+    "license_plate_state": "WV",
+    "year": "2026",
+    "make": "Ford",
+    "model": "Element",
+    "color": "green",
+    "vin": "1KGK25L7AVLE12329"
+  },
+  {
+    "license_plate_number": "AFF0099",
+    "license_plate_state": "WI",
+    "year": "2025",
+    "make": "Jeep",
+    "model": "XTS",
+    "color": "orange",
+    "vin": "YGFV28RHGKPL25918"
+  },
+  {
+    "license_plate_number": "AFF0100",
+    "license_plate_state": "WY",
+    "year": "2026",
+    "make": "Polestar",
+    "model": "V90",
+    "color": "azure",
+    "vin": "23LJCA23WVF553957"
+  }
+]
