@@ -1,2 +1,8 @@
-# Ignore all node_modules folders
-**/node_modules
+# Submodule internals
+fleet-management/Fleet_generate_automation_script/node_modules/
+fleet-management/Fleet_generate_automation_script/*.env
+
+# Main repo generated / local files
+fleet-management/generated-fleet-files/
+fleet-management/coverage/
+fleet-management/.env
