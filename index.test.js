@@ -55,11 +55,11 @@ describe('Fleet - fleet_history Test Suite', () => {
   require('./fleet-management/test/validate-fleet-history.test');
 });
 
-describe('Fleet - registration_delta Test Suite', () => {
+describe('Registration_delta Test Suite', () => {
   require('./fleet-management/test/validate-registration-delta.test');
 });
 
-describe('Fleet - registration Test Suite', () => {
+describe('Registration Test Suite', () => {
   require('./fleet-management/test/validate-registration.test');
 });
 

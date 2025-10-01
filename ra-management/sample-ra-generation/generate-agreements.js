@@ -4,7 +4,7 @@ const { faker } = require('@faker-js/faker');
 const { Liquid } = require('liquidjs');
 const path = require('path');
 const { DateTime } = require('luxon');
-const { getDbClient, closeDbClient } = require('../../utils/dbClient');
+const { parse } = require('csv-parse');   
 
 const inputArg = parseInt(process.argv[2], 10);
 if (isNaN(inputArg) || inputArg <= 0) {
@@ -24,129 +24,106 @@ function generateLocationGroup(index) {
 }
    
 function generateLicensePlate(seq) {
-    const paddedSeq = String(seq).padStart(4, '0');
-    return `ADP${paddedSeq}`;
+    const paddedSeq = String(seq + 1).padStart(4, '0');
+    return `AEA${paddedSeq}`;
 }   
 
+const offset = 18;
+
 function generateAgreementNumber(seq) {
-        return `RA-${String(generateLicensePlate(seq))}`;
-    }
+    return `RA-${String(generateLicensePlate(seq))}`;
+}
 
 function generateSequentialState(index) {
-  const usStateAbbreviations = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 
-  'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 
-  'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 
-  'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
-//   const canStateAbbreviations = [ 'AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'ON', 'PE', 'QC', 'SK', 'NT', 'NU', 'YT' ];
-  const allStateAbbreviations = [...usStateAbbreviations]; //, ...canStateAbbreviations];
-  return allStateAbbreviations[index % allStateAbbreviations.length];
+  const usStateAbbreviations = [ 'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
+  'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+  return usStateAbbreviations[index % usStateAbbreviations.length];
 }
 
 function generateAddress2(seq) {
-    return `Block ${String(seq + 1).padStart(7, '0')}`;
+    return `Block ${String(seq).padStart(7, '0')}`;
 }
 
 function generateCorporateNumber(seq) {
     return `CN-${String(generateLicensePlate(seq))}`;
 }
 
-async function fetchFleetRows(limit) {
-    const sqlFilePath = path.join(__dirname, 'sql', 'generate-agreements-records.sql');
-    const rawSql = fs.readFileSync(sqlFilePath, 'utf-8');
-    // Remove trailing semicolon if present
-    const cleanedSql = rawSql.trim().replace(/;$/, '');
-    const wrappedSql = `WITH q AS (${cleanedSql}) SELECT * FROM q LIMIT $1`;
-
-    let client;
-    try {
-        client = await getDbClient();
-    } catch (err) {
-        console.error('Error creating DB client:', err && (err.stack || err.message || err));
-        throw err;
-    }
-
-    try {
-        const res = await client.query(wrappedSql, [limit]);
-        return res.rows || [];
-    } catch (err) {
-        console.error('Error running fleet query:', err && (err.stack || err.message || err));
-        throw err;
-    }
+// NEW: read CSV instead of DB
+async function fetchFleetRowsFromCsv(filePath) {
+  return new Promise((resolve, reject) => {
+    const rows = [];
+    fs.createReadStream(filePath)
+      .pipe(parse({
+        delimiter: ',',   // your file is comma-delimited
+        columns: false,   // no headers
+        skip_empty_lines: true
+      }))
+      .on('data', (cols) => {
+        const mappedRow = {
+          brand: cols[0],
+          license_plate_number: cols[2],
+          license_plate_state: cols[3],
+          make: cols[5],
+          model: cols[6],
+          location_group: cols[9],
+          location_code: cols[10],
+          location_name: cols[11],
+          address_1: cols[12],
+          address_2: cols[13],
+          city: cols[14],
+          state: cols[15],
+          zip: cols[16]
+        };
+        rows.push(mappedRow);
+      })
+      .on('end', () => resolve(rows))
+      .on('error', (err) => reject(err));
+  });
 }
 
 function generateBAgreementData(numRecords, fleetRows = []) {
     const data = [];
-    // const sampleErrorRecords = [];
     for (let i = 1; i <= numRecords; i++) {
-        // console.log("am  here", i);
-        // const isErrorRecord = i > numRecords - 7;
         const now = DateTime.now();
         const threeDaysPastDate = now.minus({ days: 3 });
         const twoDaysPastDate = now.minus({ days: 2 });
         const yesterdayDate = now.minus({ days: 1 });
         const twentyDaysFutureDate = now.plus({ days: 20 });
 
-        // const agreement_number = isErrorRecord && i === numRecords ? null : generateAgreementNumber(i);
-        // const brand = isErrorRecord && i === numRecords - 1 ? null :
-        //               isErrorRecord && i === numRecords - 6 ? 'UNKNOWN_BRAND' :
-        //               rental_brand[Math.floor(Math.random() * rental_brand.length)];
-        // const license_plate_number = isErrorRecord && i === numRecords - 5 ? null :
-        //                              isErrorRecord && i === numRecords - 4 ? 'ABC@123!' :
-        //                              generateLicensePlate(i);
-        // const license_plate_state = isErrorRecord && i === numRecords - 3 ? null :
-        //                             isErrorRecord && i === numRecords - 2 ? 'CA$' :
-        //                             generateSequentialState(i);
-        // let checkout_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
-        // if (i === numRecords - 2) checkout_datetime = twentyDaysFutureDate.plus({ days: 1 }).toFormat('yyyy-MM-dd HH:mm:ss');
-        // if (i === numRecords) checkout_datetime = null;
+        const fleetRow = (fleetRows && fleetRows.length > 0) ? fleetRows[(i - 1) % fleetRows.length] : null;
 
-        // const estimated_checkin_datetime =
-        //     (i === numRecords - 1) ? yesterdayDate.minus({ days: 2 }).toFormat('yyyy-MM-dd HH:mm:ss')
-        //                           : twentyDaysFutureDate.toFormat('yyyy-MM-dd HH:mm:ss');
+        const brand = fleetRow?.brand || rental_brand[Math.floor(Math.random() * rental_brand.length)];
+        const license_plate_number = fleetRow?.license_plate_number || generateLicensePlate(i + offset);
+        const license_plate_state = fleetRow?.license_plate_state || generateSequentialState(i + offset);
 
-    // If we have fleetRows from the DB, use them (cycle through if fewer than numRecords)
-    const fleetRow = (fleetRows && fleetRows.length > 0) ? fleetRows[(i - 1) % fleetRows.length] : null;
+        const agreement_number = fleetRow?.license_plate_number ? `RA-${String(fleetRow.license_plate_number)}` : generateAgreementNumber(i + offset);
 
-    const brand = fleetRow?.brand || rental_brand[Math.floor(Math.random() * rental_brand.length)];
-    const license_plate_number = fleetRow?.license_plate_number || generateLicensePlate(i + 53);
-    const license_plate_state = fleetRow?.license_plate_state || generateSequentialState(i + 53);
+        const make = fleetRow?.make || faker.vehicle.manufacturer();
+        const model = fleetRow?.model || faker.vehicle.model();
+        const rental_customer_type_id = '1';
+        const corporate_account = fleetRow?.license_plate_number ? `CN-${String(fleetRow.license_plate_number)}` : generateCorporateNumber(i + offset);
 
-    // agreement_number should be RA-{license_plate_number} when license_plate_number is from DB
-    const agreement_number = fleetRow?.license_plate_number ? `RA-${String(fleetRow.license_plate_number)}` : generateAgreementNumber(i + 53);
+        let checkout_datetime = yesterdayDate.toFormat('yyyy-MM-dd 00:00:00');
+        const estimated_checkin_datetime = twentyDaysFutureDate.toFormat('yyyy-MM-dd 00:00:00');
 
-    const make = fleetRow?.make || faker.vehicle.manufacturer();
-    const model = fleetRow?.model || faker.vehicle.model();
-    const rental_customer_type_id = '1';
-    // corporate_account should be C-{license_plate_number} when license_plate_number is from DB
-    const corporate_account = fleetRow?.license_plate_number ? `CN-${String(fleetRow.license_plate_number)}` : generateCorporateNumber(i + 53);
+        if (i > numRecords - 2) {
+            checkout_datetime = threeDaysPastDate.toFormat('yyyy-MM-dd 00:00:00');
+        }
 
-    // default datetimes
-    let checkout_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
-    const estimated_checkin_datetime = twentyDaysFutureDate.toFormat('yyyy-MM-dd HH:mm:ss');
-
-    // For the last two records, checkout_datetime should be current_date - 3
-    if (i > numRecords - 2) {
-        checkout_datetime = threeDaysPastDate.toFormat('yyyy-MM-dd HH:mm:ss');
-    }
-
-    // compute checkout fields once (prefer DB values) and reuse for estimated_checkin
-    const checkout_location_group_val = fleetRow?.location_group || `Group${generateLocationGroup(i+52)}`;
-    const checkout_location_code_val = fleetRow?.location_code || location_code_list[Math.floor(Math.random() * location_code_list.length)];
-    const checkout_location_name_val = fleetRow?.location_name || faker.location.city();
-    const checkout_address_1_val = fleetRow?.address_1 || faker.location.streetAddress();
-    const checkout_address_2_val = fleetRow?.address_2 || generateAddress2(i+52);
-    const checkout_city_val = fleetRow?.city || faker.location.city();
-    const checkout_state_val = fleetRow?.state_code || generateSequentialState(i+53);
-    const checkout_zip_val = fleetRow?.zip ? String(fleetRow.zip).substring(0, 5) : faker.location.zipCode().substring(0, 5);
+        const checkout_location_group_val = fleetRow?.location_group || generateLocationGroup(i + offset);
+        const checkout_location_code_val = fleetRow?.location_code || location_code_list[Math.floor(Math.random() * location_code_list.length)];
+        const checkout_location_name_val = fleetRow?.location_name || faker.location.city();
+        const checkout_address_1_val = fleetRow?.address_1 || faker.location.streetAddress();
+        const checkout_address_2_val = fleetRow?.address_2 || generateAddress2(i + offset);
+        const checkout_city_val = fleetRow?.city || faker.location.city();
+        const checkout_state_val = fleetRow?.state_code || generateSequentialState(i + offset);
+        const checkout_zip_val = fleetRow?.zip ? String(fleetRow.zip).substring(0, 5) : faker.location.zipCode().substring(0, 5);
         
-        // Do not generate random swap datetimes for every record. Only the final record should have swap info.
         let swapIndicator = false;
-        let swapDatetime = null;
-
-        // For the last record only, set swap_indicator true and swap_datetime = current_date - 2
+        let swapDatetime = '';
         if (i === numRecords) {
             swapIndicator = true;
-            swapDatetime = twoDaysPastDate.toFormat('yyyy-MM-dd HH:mm:ss');
+            swapDatetime = twoDaysPastDate.toFormat('yyyy-MM-dd 00:00:00');
         }
 
         const record = {
@@ -186,22 +163,11 @@ function generateBAgreementData(numRecords, fleetRows = []) {
             checkin_state: '',
             checkin_zip: '',
             checkin_datetime: '',
-            
-            // checkin_location_group: estimated_checkin_location_group,
-            // checkin_location_code: estimated_checkin_location_code,
-            // checkin_location_name: estimated_checkin_location_name,
-            // checkin_address_1: estimated_checkin_address_1,
-            // checkin_address_2: estimated_checkin_address_2,
-            // checkin_city: estimated_checkin_city,
-            // checkin_state: estimated_checkin_state,
-            // checkin_zip: estimated_checkin_zip,
-            // checkin_datetime: estimated_checkin_datetime,
 
             swap_indicator: swapIndicator,
             swap_datetime: swapDatetime
         };
 
-        // For the last two records, copy checkout info into checkin and set checkin_datetime = current_date - 1
         if (i > numRecords - 2) {
             record.checkin_location_group = record.checkout_location_group;
             record.checkin_location_code = record.checkout_location_code;
@@ -211,27 +177,54 @@ function generateBAgreementData(numRecords, fleetRows = []) {
             record.checkin_city = record.checkout_city;
             record.checkin_state = record.checkout_state;
             record.checkin_zip = record.checkout_zip;
-            record.checkin_datetime = yesterdayDate.toFormat('yyyy-MM-dd HH:mm:ss');
+            record.checkin_datetime = yesterdayDate.toFormat('yyyy-MM-dd 00:00:00');
         }
 
         data.push(record);
-
     }
-
-    // console.log(`Generated ${data} b_agreements records.`);
-
-    // return { data, sampleErrorRecords };
     return { data };
 }
 
 async function generateAndWriteData() {
-    // console.log(`Generating ${b_agreements_data_count} b_agreements records...`);
-    // Fetch fleet rows from DB to seed fields
     let fleetRows = [];
+    // Look for the most recent fleet CSV in the Fleetoutput directory with the
+    // format em-fleet-MM-DD-YYYY-HH-MM.csv. If none found, fall back to
+    // ../input-data/fleet-data.csv. If still none, proceed with synthetic data.
+    let csvFilePath;
+    const fleetOutputDir = path.join(__dirname, '../../fleet-management/Fleet_generation_automation_scrpit/Fleetoutput');
     try {
-        fleetRows = await fetchFleetRows(b_agreements_data_count);
+        if (fs.existsSync(fleetOutputDir) && fs.statSync(fleetOutputDir).isDirectory()) {
+            const candidates = fs.readdirSync(fleetOutputDir).filter(f => /^em-fleet-\d{2}-\d{2}-\d{4}-\d{2}-\d{2}\.csv$/i.test(f));
+            if (candidates.length > 0) {
+                // pick newest by mtime
+                const withMtime = candidates.map(name => ({
+                    name,
+                    mtime: fs.statSync(path.join(fleetOutputDir, name)).mtime.getTime()
+                }));
+                withMtime.sort((a, b) => b.mtime - a.mtime);
+                csvFilePath = path.join(fleetOutputDir, withMtime[0].name);
+            }
+        }
+
+        // fallback to bundled sample CSV if nothing in Fleetoutput
+        if (!csvFilePath) {
+            const fallback = path.join(__dirname, '../input-data/fleet-data.csv');
+            if (fs.existsSync(fallback)) {
+                csvFilePath = fallback;
+                console.log(`No fleet CSV in Fleetoutput; using fallback: ${fallback}`);
+            }
+        }
+
+        if (csvFilePath) {
+            fleetRows = await fetchFleetRowsFromCsv(csvFilePath);
+            console.log(`Loaded ${fleetRows.length} rows from CSV file: ${csvFilePath}`);
+        } else {
+            console.warn('No fleet CSV found; proceeding with synthetic data.');
+            fleetRows = [];
+        }
     } catch (err) {
-        console.warn('Proceeding without DB rows due to error. Falling back to synthetic data.');
+        console.warn('Error loading fleet CSV; proceeding with synthetic data.', err.message);
+        fleetRows = [];
     }
 
     const { data: b_agreement_data } = generateBAgreementData(b_agreements_data_count, fleetRows);
@@ -248,16 +241,8 @@ async function generateAndWriteData() {
             num_b_agreement_data: b_agreement_data.length
         });
 
-        // Write CSV file
         fs.writeFileSync(outputCsvFilePath, output, 'utf-8');
-
-        // Write Json file
         fs.writeFileSync(outputJsonFFilePath, JSON.stringify(b_agreement_data, null, 2), 'utf-8');
-
-        // fs.writeFileSync(
-        //     path.join(__dirname, '../sample-ra-generation/generated-invalid-records.json'),
-        //     JSON.stringify(sampleErrorRecords, null, 2)
-        // );
 
         const endTime = process.hrtime(startTime);
         console.log('Sample rental agreements data generated successfully.');
@@ -266,77 +251,7 @@ async function generateAndWriteData() {
         console.log('Time taken:', (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + 'ms');
     } catch (err) {
         console.error('Error generating and writing data:', err);
-    } finally {
-        // ensure DB client is closed when finished
-        try {
-            await closeDbClient();
-        } catch (e) {
-            // ignore
-        }
     }
 }
 
 generateAndWriteData();
-
-// async function generateAndWriteData() {
-//     const { data: b_agreement_data, sampleErrorRecords } = generateBAgreementData(b_agreements_data_count);
-//     const filenameTimestamp = DateTime.now().toFormat('MM-dd-yyyy-HH-mm');
-//     const templateFilePath = path.join(__dirname, '../sample-ra-generation/b-agreements-pipe-template.txt');
-//     const outputFilePath = path.join(__dirname, `../sample-ra-generation/em-ra-${filenameTimestamp}.csv`);
-//     const errorRecordsFolder = path.join(__dirname, '../sample-ra-generation/error-records');
-
-//     try {
-//         // Ensure error-records folder exists
-//         if (!fs.existsSync(errorRecordsFolder)) {
-//             fs.mkdirSync(errorRecordsFolder, { recursive: true });
-//         }
-
-//         // Load and render Liquid template
-//         const liquidTemplate = fs.readFileSync(templateFilePath, 'utf-8');
-//         const engine = new Liquid({ greedy: true });
-//         const output = await engine.parseAndRenderSync(liquidTemplate, {
-//             b_agreement_data,
-//             num_b_agreement_data: b_agreement_data.length
-//         });
-
-//         // Write main CSV
-//         fs.writeFileSync(outputFilePath, output, 'utf-8');
-
-//         // Write all error records into a single JSON
-//         fs.writeFileSync(
-//             path.join(__dirname, '../sample-ra-generation/generated-invalid-records.json'),
-//             JSON.stringify(sampleErrorRecords, null, 2)
-//         );
-
-//         // Helper to identify and describe error in each record
-//         function getErrorDescription(record) {
-//             if (!record.agreement_number) return 'missing_agreement_number';
-//             if (!record.brand) return 'missing_brand';
-//             if (record.brand === 'UNKNOWN_BRAND') return 'invalid_brand';
-//             if (!record.license_plate_number) return 'missing_license_plate';
-//             if (record.license_plate_number.includes('@')) return 'invalid_license_plate_format';
-//             if (!record.license_plate_state) return 'missing_license_plate_state';
-//             if (record.license_plate_state.includes('$')) return 'invalid_license_plate_state';
-//             if (!record.checkout_datetime) return 'missing_checkout_datetime';
-//             if (record.checkout_datetime && DateTime.fromFormat(record.checkout_datetime, 'yyyy-MM-dd HH:mm:ss') > DateTime.now().plus({ days: 20 })) return 'checkout_date_future';
-//             if (record.estimated_checkin_datetime && DateTime.fromFormat(record.estimated_checkin_datetime, 'yyyy-MM-dd HH:mm:ss') < DateTime.now()) return 'estimated_checkin_date_in_past';
-//             return 'unknown_error';
-//         }
-
-//         // Write each error record to its own descriptive JSON file
-//         sampleErrorRecords.forEach((record, idx) => {
-//             const errorDesc = getErrorDescription(record);
-//             const sanitizedErrorDesc = errorDesc.replace(/[^a-zA-Z0-9_-]/g, '_');
-//             const errorFilePath = path.join(errorRecordsFolder, `error-${idx + 1}-${sanitizedErrorDesc}.json`);
-//             fs.writeFileSync(errorFilePath, JSON.stringify(record, null, 2));
-//         });
-
-//         const endTime = process.hrtime(startTime);
-//         console.log('Sample rental agreements data generated successfully.');
-//         console.log('Individual error records saved to:', errorRecordsFolder);
-//         console.log('Time taken:', (endTime[0] * 1000 + endTime[1] / 1e6).toFixed(2) + 'ms');
-//     } catch (err) {
-//         console.error('Error generating and writing data:', err);
-//     }
-// }
-// generateAndWriteData();

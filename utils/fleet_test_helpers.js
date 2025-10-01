@@ -1,8 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-function loadJson(fileName) {
-  const filePath = path.join('D:/Uptech-Test-Automation/fleet-management/json', fileName);
+function loadJson(folderOrFile, maybeFile) {
+  const basePath = 'D:/Uptech-Test-Automation/fleet-management/json';
+  const filePath = maybeFile
+    ? path.join(basePath, folderOrFile, maybeFile) // folder + file
+    : path.join(basePath, folderOrFile);           // just file
+
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
