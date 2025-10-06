@@ -1,12 +1,1 @@
-# Dependencies
-/node_modules
-/fleet-management/node_modules
-/fleet-management/Fleet_generate_automation_script/node_modules
-
-# Environment variables
-.env
-/fleet-management/.env
-
-# Azurite database file
-/__azurite_db_table__.json
-/fleet-management/__azurite_db_table__.json
+node_modules/
