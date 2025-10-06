@@ -1,6 +1,0 @@
-[submodule "fleet-management"]
-	path = fleet-management
-	url = https://github.com/mani-sequoiaat/Fleet_Automation.git
-[submodule "fleet-management/Fleet_generate_automation_script"]
-	path = fleet-management/Fleet_generate_automation_script
-	url = https://github.com/mani-sequoiaat/Fleet_generate_automation_script.git
