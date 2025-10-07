@@ -1,723 +1,903 @@
 [
   {
-    "license_plate_number": "AFK0001",
+    "license_plate_number": "AFL0001",
     "license_plate_state": "AL",
-    "year": "2023",
-    "make": "Suzuki",
-    "model": "Aventador",
-    "color": "tan",
-    "vin": "E88MCHVB8UYS94523"
+    "year": "2025",
+    "make": "Maserati",
+    "model": "Land Cruiser",
+    "color": "mint green",
+    "vin": "TLNK453372NX59650"
   },
   {
-    "license_plate_number": "AFK0002",
+    "license_plate_number": "AFL0002",
     "license_plate_state": "AK",
-    "year": "2024",
-    "make": "BYD",
-    "model": "Model X",
-    "color": "green",
-    "vin": "WK0T9D1X48ZB68538"
+    "year": "2023",
+    "make": "Maserati",
+    "model": "XTS",
+    "color": "white",
+    "vin": "XX36CD00FAT794800"
   },
   {
-    "license_plate_number": "AFK0003",
+    "license_plate_number": "AFL0003",
     "license_plate_state": "AZ",
     "year": "2025",
-    "make": "Renault",
-    "model": "Model S",
-    "color": "white",
-    "vin": "5V4GYL01Z9D592793"
+    "make": "Mercedes Benz",
+    "model": "F-150",
+    "color": "maroon",
+    "vin": "E54BLE5H4FP535324"
   },
   {
-    "license_plate_number": "AFK0004",
+    "license_plate_number": "AFL0004",
     "license_plate_state": "AR",
-    "year": "2025",
-    "make": "Chrysler",
-    "model": "Civic",
-    "color": "cyan",
-    "vin": "UUSRS1BW7NBT92501"
+    "year": "2026",
+    "make": "NIO",
+    "model": "Taurus",
+    "color": "lavender",
+    "vin": "VNM81RPB9CGG26409"
   },
   {
-    "license_plate_number": "AFK0005",
+    "license_plate_number": "AFL0005",
     "license_plate_state": "CA",
     "year": "2023",
-    "make": "Chevrolet",
-    "model": "Roadster",
-    "color": "mint green",
-    "vin": "65ALAZCPN8UJ37816"
+    "make": "BYD",
+    "model": "PT Cruiser",
+    "color": "maroon",
+    "vin": "89AYS2B0ZGHV04736"
   },
   {
-    "license_plate_number": "AFK0006",
+    "license_plate_number": "AFL0006",
     "license_plate_state": "CO",
     "year": "2024",
-    "make": "Mazda",
-    "model": "A8",
-    "color": "purple",
-    "vin": "36JPLK42BNTJ50869"
+    "make": "Ford",
+    "model": "Cruze",
+    "color": "azure",
+    "vin": "7Y6N2LXKSCEJ50918"
   },
   {
-    "license_plate_number": "AFK0007",
+    "license_plate_number": "AFL0007",
     "license_plate_state": "CT",
-    "year": "2023",
-    "make": "Audi",
-    "model": "Grand Caravan",
-    "color": "indigo",
-    "vin": "4YANZAB9JUWS31068"
+    "year": "2025",
+    "make": "Mazda",
+    "model": "Model X",
+    "color": "turquoise",
+    "vin": "ZGNWUUVKDGEB32557"
   },
   {
-    "license_plate_number": "AFK0008",
+    "license_plate_number": "AFL0008",
     "license_plate_state": "DE",
     "year": "2026",
-    "make": "Porsche",
-    "model": "LeBaron",
-    "color": "gold",
-    "vin": "GZXCTWGYFSYN28483"
+    "make": "Hyundai",
+    "model": "Focus",
+    "color": "black",
+    "vin": "ZJYPRU15LPBF50711"
   },
   {
-    "license_plate_number": "AFK0009",
+    "license_plate_number": "AFL0009",
     "license_plate_state": "FL",
-    "year": "2026",
-    "make": "Tata",
-    "model": "Beetle",
-    "color": "indigo",
-    "vin": "ZSASWXWHGJJL85339"
-  },
-  {
-    "license_plate_number": "AFK0010",
-    "license_plate_state": "GA",
     "year": "2025",
-    "make": "Mitsubishi",
-    "model": "Mercielago",
+    "make": "Skoda",
+    "model": "CTS",
     "color": "silver",
-    "vin": "SNP8GAA6V7JD17771"
+    "vin": "FJ9FUR1UVBPJ68583"
   },
   {
-    "license_plate_number": "AFK0011",
+    "license_plate_number": "AFL0010",
+    "license_plate_state": "GA",
+    "year": "2026",
+    "make": "Renault",
+    "model": "Sentra",
+    "color": "turquoise",
+    "vin": "MLHG5RRU71G114794"
+  },
+  {
+    "license_plate_number": "AFL0011",
     "license_plate_state": "HI",
-    "year": "2023",
-    "make": "Rolls Royce",
-    "model": "ATS",
-    "color": "orange",
-    "vin": "AE0EW0KGWNCP55690"
-  },
-  {
-    "license_plate_number": "AFK0012",
-    "license_plate_state": "ID",
-    "year": "2024",
-    "make": "BYD",
-    "model": "Escalade",
-    "color": "tan",
-    "vin": "DRZA0MEGF5XR47736"
-  },
-  {
-    "license_plate_number": "AFK0013",
-    "license_plate_state": "IL",
-    "year": "2023",
-    "make": "BMW",
-    "model": "Camry",
-    "color": "sky blue",
-    "vin": "SA6R48UFGUV298678"
-  },
-  {
-    "license_plate_number": "AFK0014",
-    "license_plate_state": "IN",
-    "year": "2023",
-    "make": "Subaru",
-    "model": "Corvette",
+    "year": "2026",
+    "make": "Suzuki",
+    "model": "XTS",
     "color": "azure",
-    "vin": "E65Y5P0KHSMD73349"
+    "vin": "DFXBHJ9DNYH249600"
   },
   {
-    "license_plate_number": "AFK0015",
-    "license_plate_state": "IA",
+    "license_plate_number": "AFL0012",
+    "license_plate_state": "ID",
     "year": "2023",
-    "make": "Smart",
-    "model": "Durango",
-    "color": "violet",
-    "vin": "TN754LJKSBN662545"
+    "make": "Chrysler",
+    "model": "Model S",
+    "color": "cyan",
+    "vin": "BUZSCKP4M4JG83500"
   },
   {
-    "license_plate_number": "AFK0016",
-    "license_plate_state": "KS",
+    "license_plate_number": "AFL0013",
+    "license_plate_state": "IL",
+    "year": "2026",
+    "make": "Bentley",
+    "model": "Durango",
+    "color": "salmon",
+    "vin": "PKLVK5FS7HUJ41249"
+  },
+  {
+    "license_plate_number": "AFL0014",
+    "license_plate_state": "IN",
     "year": "2025",
     "make": "Tesla",
     "model": "Beetle",
-    "color": "green",
-    "vin": "DR5LS2NSKMG085668"
-  },
-  {
-    "license_plate_number": "AFK0017",
-    "license_plate_state": "KY",
-    "year": "2023",
-    "make": "MG",
-    "model": "Alpine",
-    "color": "gold",
-    "vin": "4PG7SRWJH0CB44502"
-  },
-  {
-    "license_plate_number": "AFK0018",
-    "license_plate_state": "LA",
-    "year": "2025",
-    "make": "Fiat",
-    "model": "Altima",
-    "color": "blue",
-    "vin": "XBJ4APGW78KJ69841"
-  },
-  {
-    "license_plate_number": "AFK0019",
-    "license_plate_state": "ME",
-    "year": "2025",
-    "make": "Mini",
-    "model": "Roadster",
-    "color": "indigo",
-    "vin": "1NS9EBK35NMF40771"
-  },
-  {
-    "license_plate_number": "AFK0020",
-    "license_plate_state": "MD",
-    "year": "2025",
-    "make": "Lamborghini",
-    "model": "Model S",
-    "color": "white",
-    "vin": "S1H9FAUM32E323353"
-  },
-  {
-    "license_plate_number": "AFK0021",
-    "license_plate_state": "MA",
-    "year": "2026",
-    "make": "Tata",
-    "model": "LeBaron",
-    "color": "gold",
-    "vin": "0FWZ6T25JLDR98153"
-  },
-  {
-    "license_plate_number": "AFK0022",
-    "license_plate_state": "MI",
-    "year": "2024",
-    "make": "Toyota",
-    "model": "Prius",
-    "color": "maroon",
-    "vin": "A167MRW49WMZ83040"
-  },
-  {
-    "license_plate_number": "AFK0023",
-    "license_plate_state": "MN",
-    "year": "2024",
-    "make": "Bentley",
-    "model": "V90",
-    "color": "purple",
-    "vin": "AZKH25HZTPNM90275"
-  },
-  {
-    "license_plate_number": "AFK0024",
-    "license_plate_state": "MS",
-    "year": "2024",
-    "make": "Polestar",
-    "model": "Spyder",
-    "color": "yellow",
-    "vin": "F4SA7G4JTKYG74143"
-  },
-  {
-    "license_plate_number": "AFK0025",
-    "license_plate_state": "MO",
-    "year": "2023",
-    "make": "Ferrari",
-    "model": "CX-9",
-    "color": "indigo",
-    "vin": "52K95FRXJ2XR84668"
-  },
-  {
-    "license_plate_number": "AFK0026",
-    "license_plate_state": "MT",
-    "year": "2023",
-    "make": "Renault",
-    "model": "Jetta",
-    "color": "blue",
-    "vin": "XDCYRLN4NVER98864"
-  },
-  {
-    "license_plate_number": "AFK0027",
-    "license_plate_state": "NE",
-    "year": "2024",
-    "make": "Lamborghini",
-    "model": "XTS",
-    "color": "azure",
-    "vin": "25ZZ4MJ2J2YZ99296"
-  },
-  {
-    "license_plate_number": "AFK0028",
-    "license_plate_state": "NV",
-    "year": "2026",
-    "make": "Aston Martin",
-    "model": "F-150",
-    "color": "lavender",
-    "vin": "F596W3XVPMBL70252"
-  },
-  {
-    "license_plate_number": "AFK0029",
-    "license_plate_state": "NH",
-    "year": "2023",
-    "make": "Chrysler",
-    "model": "A4",
-    "color": "teal",
-    "vin": "PTZTEXNAX5DE88552"
-  },
-  {
-    "license_plate_number": "AFK0030",
-    "license_plate_state": "NJ",
-    "year": "2026",
-    "make": "Honda",
-    "model": "A8",
-    "color": "sky blue",
-    "vin": "E64R68EV0ZXX31069"
-  },
-  {
-    "license_plate_number": "AFK0031",
-    "license_plate_state": "NM",
-    "year": "2025",
-    "make": "Volvo",
-    "model": "XC90",
-    "color": "lime",
-    "vin": "7ZFGMGBJMUR664339"
-  },
-  {
-    "license_plate_number": "AFK0032",
-    "license_plate_state": "NY",
-    "year": "2025",
-    "make": "NIO",
-    "model": "Focus",
-    "color": "tan",
-    "vin": "742NKKJC3TB545759"
-  },
-  {
-    "license_plate_number": "AFK0033",
-    "license_plate_state": "NC",
-    "year": "2024",
-    "make": "Smart",
-    "model": "911",
-    "color": "lime",
-    "vin": "KLLLNVAKDMW833120"
-  },
-  {
-    "license_plate_number": "AFK0034",
-    "license_plate_state": "ND",
-    "year": "2025",
-    "make": "Subaru",
-    "model": "Challenger",
-    "color": "silver",
-    "vin": "SH5GGAUM3KLM92842"
-  },
-  {
-    "license_plate_number": "AFK0035",
-    "license_plate_state": "OH",
-    "year": "2026",
-    "make": "Lamborghini",
-    "model": "1",
-    "color": "fuchsia",
-    "vin": "K3T1PZULMRWR63012"
-  },
-  {
-    "license_plate_number": "AFK0036",
-    "license_plate_state": "OK",
-    "year": "2023",
-    "make": "Rivian",
-    "model": "Durango",
-    "color": "grey",
-    "vin": "9NJRJT7TKFZB15227"
-  },
-  {
-    "license_plate_number": "AFK0037",
-    "license_plate_state": "OR",
-    "year": "2026",
-    "make": "Land Rover",
-    "model": "Element",
-    "color": "lime",
-    "vin": "5TZXR782L4ZL55273"
-  },
-  {
-    "license_plate_number": "AFK0038",
-    "license_plate_state": "PA",
-    "year": "2023",
-    "make": "Chrysler",
-    "model": "911",
     "color": "plum",
-    "vin": "D1EN0J36CYBB79106"
+    "vin": "DB87P675FLUY44650"
   },
   {
-    "license_plate_number": "AFK0039",
-    "license_plate_state": "RI",
+    "license_plate_number": "AFL0015",
+    "license_plate_state": "IA",
+    "year": "2025",
+    "make": "Jaguar",
+    "model": "Malibu",
+    "color": "plum",
+    "vin": "ZXUEZN220JH107882"
+  },
+  {
+    "license_plate_number": "AFL0016",
+    "license_plate_state": "KS",
+    "year": "2023",
+    "make": "Mazda",
+    "model": "2",
+    "color": "white",
+    "vin": "WE7263Z1ZHD815475"
+  },
+  {
+    "license_plate_number": "AFL0017",
+    "license_plate_state": "KY",
+    "year": "2025",
+    "make": "Renault",
+    "model": "Focus",
+    "color": "indigo",
+    "vin": "SFPC1STWCGJ278600"
+  },
+  {
+    "license_plate_number": "AFL0018",
+    "license_plate_state": "LA",
     "year": "2026",
-    "make": "Vauxhall",
+    "make": "Mini",
+    "model": "Camry",
+    "color": "orchid",
+    "vin": "9NKH2Y3YE7YE97810"
+  },
+  {
+    "license_plate_number": "AFL0019",
+    "license_plate_state": "ME",
+    "year": "2024",
+    "make": "Volkswagen",
+    "model": "Charger",
+    "color": "lavender",
+    "vin": "K12XLH1N0NEZ57360"
+  },
+  {
+    "license_plate_number": "AFL0020",
+    "license_plate_state": "MD",
+    "year": "2023",
+    "make": "Mahindra & Mahindra",
+    "model": "Aventador",
+    "color": "sky blue",
+    "vin": "EJHYJY8HD3H414107"
+  },
+  {
+    "license_plate_number": "AFL0021",
+    "license_plate_state": "MA",
+    "year": "2024",
+    "make": "Chevrolet",
     "model": "LeBaron",
     "color": "orchid",
-    "vin": "815191WHYHCX04046"
+    "vin": "PJKMXPB0TTGZ60143"
   },
   {
-    "license_plate_number": "AFK0040",
-    "license_plate_state": "SC",
-    "year": "2024",
-    "make": "Land Rover",
-    "model": "Model S",
-    "color": "purple",
-    "vin": "4VAT271LC1HB97064"
-  },
-  {
-    "license_plate_number": "AFK0041",
-    "license_plate_state": "SD",
-    "year": "2023",
-    "make": "Rolls Royce",
-    "model": "Malibu",
-    "color": "lavender",
-    "vin": "ZPAAVWY3F9W144188"
-  },
-  {
-    "license_plate_number": "AFK0042",
-    "license_plate_state": "TN",
-    "year": "2023",
-    "make": "Chrysler",
-    "model": "Focus",
-    "color": "lime",
-    "vin": "84Z4KCKYHLS645995"
-  },
-  {
-    "license_plate_number": "AFK0043",
-    "license_plate_state": "TX",
-    "year": "2026",
-    "make": "BYD",
-    "model": "Mercielago",
-    "color": "black",
-    "vin": "1966P4C9V0FD21610"
-  },
-  {
-    "license_plate_number": "AFK0044",
-    "license_plate_state": "UT",
-    "year": "2023",
-    "make": "Land Rover",
-    "model": "Model 3",
-    "color": "azure",
-    "vin": "6W99ND7GE0UL90410"
-  },
-  {
-    "license_plate_number": "AFK0045",
-    "license_plate_state": "VT",
-    "year": "2024",
-    "make": "Ferrari",
-    "model": "Impala",
-    "color": "silver",
-    "vin": "R829RY2MKBNC90269"
-  },
-  {
-    "license_plate_number": "AFK0046",
-    "license_plate_state": "VA",
-    "year": "2025",
-    "make": "Fiat",
-    "model": "Sentra",
-    "color": "grey",
-    "vin": "CXMRJU250FF766109"
-  },
-  {
-    "license_plate_number": "AFK0047",
-    "license_plate_state": "WA",
-    "year": "2024",
-    "make": "Toyota",
-    "model": "Model T",
-    "color": "white",
-    "vin": "CSVDNAKX7ZJV71806"
-  },
-  {
-    "license_plate_number": "AFK0048",
-    "license_plate_state": "WV",
-    "year": "2026",
-    "make": "Jaguar",
-    "model": "Jetta",
-    "color": "mint green",
-    "vin": "WJ1G6CEW7EU883359"
-  },
-  {
-    "license_plate_number": "AFK0049",
-    "license_plate_state": "WI",
-    "year": "2023",
-    "make": "Tata",
-    "model": "Impala",
-    "color": "turquoise",
-    "vin": "XCM8GLLZAEKK44556"
-  },
-  {
-    "license_plate_number": "AFK0050",
-    "license_plate_state": "WY",
-    "year": "2024",
-    "make": "Mazda",
-    "model": "911",
-    "color": "lime",
-    "vin": "F7GHC16AKLHE70288"
-  },
-  {
-    "license_plate_number": "AFK0051",
-    "license_plate_state": "AL",
-    "year": "2024",
-    "make": "Bugatti",
-    "model": "Element",
-    "color": "pink",
-    "vin": "Z9593E344DEV79652"
-  },
-  {
-    "license_plate_number": "AFK0052",
-    "license_plate_state": "AK",
-    "year": "2024",
-    "make": "BMW",
-    "model": "Model T",
-    "color": "olive",
-    "vin": "4FEX8B3KP7FS57626"
-  },
-  {
-    "license_plate_number": "AFK0053",
-    "license_plate_state": "AZ",
-    "year": "2023",
-    "make": "Vauxhall",
-    "model": "Camaro",
-    "color": "turquoise",
-    "vin": "CBSV1A1A1SPD52697"
-  },
-  {
-    "license_plate_number": "AFK0054",
-    "license_plate_state": "AR",
-    "year": "2025",
-    "make": "NIO",
-    "model": "PT Cruiser",
-    "color": "plum",
-    "vin": "A6GD72E28DYY94515"
-  },
-  {
-    "license_plate_number": "AFK0055",
-    "license_plate_state": "CA",
-    "year": "2023",
-    "make": "Maruti",
-    "model": "Colorado",
-    "color": "ivory",
-    "vin": "JDGYK1ENUJWY31011"
-  },
-  {
-    "license_plate_number": "AFK0056",
-    "license_plate_state": "CO",
-    "year": "2026",
-    "make": "Mercedes Benz",
-    "model": "Cruze",
-    "color": "purple",
-    "vin": "MZN2UU8PEAFX16325"
-  },
-  {
-    "license_plate_number": "AFK0057",
-    "license_plate_state": "CT",
-    "year": "2026",
-    "make": "Honda",
-    "model": "Alpine",
-    "color": "turquoise",
-    "vin": "SB1MNHZ987YV56758"
-  },
-  {
-    "license_plate_number": "AFK0058",
-    "license_plate_state": "DE",
-    "year": "2023",
-    "make": "Land Rover",
-    "model": "Land Cruiser",
-    "color": "green",
-    "vin": "82RHMUYH1FS696268"
-  },
-  {
-    "license_plate_number": "AFK0059",
-    "license_plate_state": "FL",
-    "year": "2025",
-    "make": "Honda",
-    "model": "Spyder",
-    "color": "white",
-    "vin": "PX1WZCBVSXTK85103"
-  },
-  {
-    "license_plate_number": "AFK0060",
-    "license_plate_state": "GA",
-    "year": "2026",
-    "make": "Audi",
-    "model": "Grand Cherokee",
-    "color": "maroon",
-    "vin": "F6VPRY9GK9RE67861"
-  },
-  {
-    "license_plate_number": "AFK0061",
-    "license_plate_state": "HI",
-    "year": "2026",
-    "make": "Maserati",
-    "model": "Silverado",
-    "color": "maroon",
-    "vin": "4JMNPBBK2RAG51363"
-  },
-  {
-    "license_plate_number": "AFK0062",
-    "license_plate_state": "ID",
-    "year": "2026",
-    "make": "Land Rover",
-    "model": "XTS",
-    "color": "azure",
-    "vin": "HGRHG7BW9SJR97911"
-  },
-  {
-    "license_plate_number": "AFK0063",
-    "license_plate_state": "IL",
-    "year": "2023",
-    "make": "Rolls Royce",
-    "model": "PT Cruiser",
-    "color": "grey",
-    "vin": "PAPCC84DD0KZ31714"
-  },
-  {
-    "license_plate_number": "AFK0064",
-    "license_plate_state": "IN",
-    "year": "2025",
-    "make": "Rivian",
-    "model": "Charger",
-    "color": "red",
-    "vin": "H2CD64RJZ3X290676"
-  },
-  {
-    "license_plate_number": "AFK0065",
-    "license_plate_state": "IA",
-    "year": "2024",
-    "make": "Fiat",
-    "model": "Expedition",
-    "color": "gold",
-    "vin": "2BJHWVZ78CS913301"
-  },
-  {
-    "license_plate_number": "AFK0066",
-    "license_plate_state": "KS",
-    "year": "2023",
-    "make": "Polestar",
-    "model": "2",
-    "color": "tan",
-    "vin": "BS7YUVP0GWXC68786"
-  },
-  {
-    "license_plate_number": "AFK0067",
-    "license_plate_state": "KY",
-    "year": "2024",
-    "make": "Smart",
-    "model": "Roadster",
-    "color": "indigo",
-    "vin": "FB0FJXC1GRRP66744"
-  },
-  {
-    "license_plate_number": "AFK0068",
-    "license_plate_state": "LA",
-    "year": "2024",
-    "make": "Volvo",
-    "model": "Alpine",
-    "color": "plum",
-    "vin": "FH9YSC9A21MA80405"
-  },
-  {
-    "license_plate_number": "AFK0069",
-    "license_plate_state": "ME",
-    "year": "2023",
-    "make": "Tesla",
-    "model": "Ranchero",
-    "color": "olive",
-    "vin": "R2FK9SXH75J382979"
-  },
-  {
-    "license_plate_number": "AFK0070",
-    "license_plate_state": "MD",
-    "year": "2023",
-    "make": "Maserati",
-    "model": "Countach",
-    "color": "olive",
-    "vin": "XP96DRP976BH11239"
-  },
-  {
-    "license_plate_number": "AFK0071",
-    "license_plate_state": "MA",
-    "year": "2023",
-    "make": "Aston Martin",
-    "model": "Malibu",
-    "color": "blue",
-    "vin": "AW287H7GAMK277121"
-  },
-  {
-    "license_plate_number": "AFK0072",
+    "license_plate_number": "AFL0022",
     "license_plate_state": "MI",
     "year": "2026",
-    "make": "Polestar",
-    "model": "Accord",
-    "color": "olive",
-    "vin": "51DNP78YA3RX41750"
+    "make": "Mini",
+    "model": "Grand Cherokee",
+    "color": "silver",
+    "vin": "FG29B7ZVBYVE45610"
   },
   {
-    "license_plate_number": "AFK0073",
+    "license_plate_number": "AFL0023",
     "license_plate_state": "MN",
-    "year": "2024",
-    "make": "Aston Martin",
-    "model": "Fiesta",
-    "color": "magenta",
-    "vin": "4V0UHWKRJCG209234"
+    "year": "2023",
+    "make": "BYD",
+    "model": "A8",
+    "color": "mint green",
+    "vin": "DDFRYNMAVWYV19982"
   },
   {
-    "license_plate_number": "AFK0074",
+    "license_plate_number": "AFL0024",
     "license_plate_state": "MS",
-    "year": "2025",
-    "make": "Vauxhall",
-    "model": "Camry",
-    "color": "indigo",
-    "vin": "Z157RKZCU2S707112"
+    "year": "2026",
+    "make": "Jaguar",
+    "model": "El Camino",
+    "color": "salmon",
+    "vin": "P3SVJP9X3JS388136"
   },
   {
-    "license_plate_number": "AFK0075",
+    "license_plate_number": "AFL0025",
     "license_plate_state": "MO",
     "year": "2026",
-    "make": "Cadillac",
-    "model": "Durango",
-    "color": "lavender",
-    "vin": "JTBKB16EDCM445012"
+    "make": "Audi",
+    "model": "V90",
+    "color": "fuchsia",
+    "vin": "S7UP84GFBZS368347"
   },
   {
-    "license_plate_number": "AFK0076",
+    "license_plate_number": "AFL0026",
     "license_plate_state": "MT",
-    "year": "2026",
-    "make": "Tesla",
-    "model": "XC90",
-    "color": "sky blue",
-    "vin": "ZBBDSX6U4LMV04275"
+    "year": "2024",
+    "make": "Fiat",
+    "model": "ATS",
+    "color": "orchid",
+    "vin": "SWRBUF5MM4XE47826"
   },
   {
-    "license_plate_number": "AFK0077",
+    "license_plate_number": "AFL0027",
     "license_plate_state": "NE",
     "year": "2023",
-    "make": "Mazda",
-    "model": "Expedition",
-    "color": "fuchsia",
-    "vin": "8BDU72XLKXU755963"
+    "make": "Mitsubishi",
+    "model": "Beetle",
+    "color": "cyan",
+    "vin": "4NMYPEGS18L204391"
   },
   {
-    "license_plate_number": "AFK0078",
+    "license_plate_number": "AFL0028",
     "license_plate_state": "NV",
-    "year": "2025",
-    "make": "Citroën",
-    "model": "V90",
-    "color": "magenta",
-    "vin": "5HK39U68B2V090563"
+    "year": "2023",
+    "make": "BYD",
+    "model": "Model T",
+    "color": "black",
+    "vin": "4JKXCKSNSTHX25386"
   },
   {
-    "license_plate_number": "AFK0079",
+    "license_plate_number": "AFL0029",
     "license_plate_state": "NH",
     "year": "2024",
-    "make": "Volvo",
-    "model": "Model S",
-    "color": "teal",
-    "vin": "75HLX21M71RR65083"
+    "make": "Jeep",
+    "model": "Impala",
+    "color": "orchid",
+    "vin": "U2FZ683JMJCF22031"
   },
   {
-    "license_plate_number": "AFK0080",
+    "license_plate_number": "AFL0030",
     "license_plate_state": "NJ",
+    "year": "2025",
+    "make": "Hyundai",
+    "model": "Roadster",
+    "color": "indigo",
+    "vin": "PBB35SH085GD73210"
+  },
+  {
+    "license_plate_number": "AFL0031",
+    "license_plate_state": "NM",
+    "year": "2025",
+    "make": "Tata",
+    "model": "Fortwo",
+    "color": "olive",
+    "vin": "1682UH1XP8A793018"
+  },
+  {
+    "license_plate_number": "AFL0032",
+    "license_plate_state": "NY",
     "year": "2023",
-    "make": "Mercedes Benz",
-    "model": "Jetta",
+    "make": "Maserati",
+    "model": "Volt",
+    "color": "mint green",
+    "vin": "YHLAKMW65DWP70224"
+  },
+  {
+    "license_plate_number": "AFL0033",
+    "license_plate_state": "NC",
+    "year": "2025",
+    "make": "Hyundai",
+    "model": "Challenger",
+    "color": "orchid",
+    "vin": "PVCL9M0M85YU25462"
+  },
+  {
+    "license_plate_number": "AFL0034",
+    "license_plate_state": "ND",
+    "year": "2026",
+    "make": "Lamborghini",
+    "model": "CX-9",
+    "color": "turquoise",
+    "vin": "SV7SRMJYSLS276690"
+  },
+  {
+    "license_plate_number": "AFL0035",
+    "license_plate_state": "OH",
+    "year": "2025",
+    "make": "Nissan",
+    "model": "Charger",
+    "color": "olive",
+    "vin": "JTECD0P743WS67586"
+  },
+  {
+    "license_plate_number": "AFL0036",
+    "license_plate_state": "OK",
+    "year": "2025",
+    "make": "Kia",
+    "model": "F-150",
+    "color": "cyan",
+    "vin": "9EPFJTSTA3X405874"
+  },
+  {
+    "license_plate_number": "AFL0037",
+    "license_plate_state": "OR",
+    "year": "2024",
+    "make": "Mitsubishi",
+    "model": "2",
+    "color": "azure",
+    "vin": "WFB1UT1UKVJC44836"
+  },
+  {
+    "license_plate_number": "AFL0038",
+    "license_plate_state": "PA",
+    "year": "2023",
+    "make": "Mazda",
+    "model": "Explorer",
+    "color": "ivory",
+    "vin": "1YY1DVJTJ9AB37304"
+  },
+  {
+    "license_plate_number": "AFL0039",
+    "license_plate_state": "RI",
+    "year": "2026",
+    "make": "Polestar",
+    "model": "Impala",
+    "color": "mint green",
+    "vin": "UV1TFCSV5DWH99539"
+  },
+  {
+    "license_plate_number": "AFL0040",
+    "license_plate_state": "SC",
+    "year": "2023",
+    "make": "MG",
+    "model": "Element",
+    "color": "olive",
+    "vin": "ZWAWHB9CRPPT08250"
+  },
+  {
+    "license_plate_number": "AFL0041",
+    "license_plate_state": "SD",
+    "year": "2024",
+    "make": "MG",
+    "model": "Countach",
+    "color": "pink",
+    "vin": "M7JAW9V0NCMR90604"
+  },
+  {
+    "license_plate_number": "AFL0042",
+    "license_plate_state": "TN",
+    "year": "2024",
+    "make": "Toyota",
+    "model": "CX-9",
+    "color": "yellow",
+    "vin": "SCE875UMJRH834746"
+  },
+  {
+    "license_plate_number": "AFL0043",
+    "license_plate_state": "TX",
+    "year": "2026",
+    "make": "Subaru",
+    "model": "Roadster",
     "color": "sky blue",
-    "vin": "9VY7EKWRX4RT15654"
+    "vin": "L85JUX45LZAG71014"
+  },
+  {
+    "license_plate_number": "AFL0044",
+    "license_plate_state": "UT",
+    "year": "2023",
+    "make": "Hyundai",
+    "model": "Grand Caravan",
+    "color": "mint green",
+    "vin": "EYTXYYLV5FX674217"
+  },
+  {
+    "license_plate_number": "AFL0045",
+    "license_plate_state": "VT",
+    "year": "2023",
+    "make": "Hyundai",
+    "model": "Cruze",
+    "color": "lime",
+    "vin": "TMU4C977CZNL09334"
+  },
+  {
+    "license_plate_number": "AFL0046",
+    "license_plate_state": "VA",
+    "year": "2024",
+    "make": "Bugatti",
+    "model": "Taurus",
+    "color": "olive",
+    "vin": "1R4DME5J9EVS68801"
+  },
+  {
+    "license_plate_number": "AFL0047",
+    "license_plate_state": "WA",
+    "year": "2023",
+    "make": "Tesla",
+    "model": "CX-9",
+    "color": "salmon",
+    "vin": "S27C96M6K1FA70072"
+  },
+  {
+    "license_plate_number": "AFL0048",
+    "license_plate_state": "WV",
+    "year": "2024",
+    "make": "Ferrari",
+    "model": "CX-9",
+    "color": "pink",
+    "vin": "E4VKCW73Z1AZ02058"
+  },
+  {
+    "license_plate_number": "AFL0049",
+    "license_plate_state": "WI",
+    "year": "2024",
+    "make": "Vauxhall",
+    "model": "V90",
+    "color": "white",
+    "vin": "A8FBYU3PEWFD31054"
+  },
+  {
+    "license_plate_number": "AFL0050",
+    "license_plate_state": "WY",
+    "year": "2026",
+    "make": "Fiat",
+    "model": "Model T",
+    "color": "tan",
+    "vin": "5HT8TBENS4C385734"
+  },
+  {
+    "license_plate_number": "AFL0051",
+    "license_plate_state": "AL",
+    "year": "2025",
+    "make": "Kia",
+    "model": "F-150",
+    "color": "grey",
+    "vin": "6EZZW08SNZXK17332"
+  },
+  {
+    "license_plate_number": "AFL0052",
+    "license_plate_state": "AK",
+    "year": "2024",
+    "make": "Fiat",
+    "model": "Grand Caravan",
+    "color": "lavender",
+    "vin": "BSSMEDYCL9X031568"
+  },
+  {
+    "license_plate_number": "AFL0053",
+    "license_plate_state": "AZ",
+    "year": "2025",
+    "make": "Bugatti",
+    "model": "Ranchero",
+    "color": "orchid",
+    "vin": "CJS1A9SM5PVU71339"
+  },
+  {
+    "license_plate_number": "AFL0054",
+    "license_plate_state": "AR",
+    "year": "2024",
+    "make": "Volkswagen",
+    "model": "V90",
+    "color": "pink",
+    "vin": "UY9GAL7HKVHC60249"
+  },
+  {
+    "license_plate_number": "AFL0055",
+    "license_plate_state": "CA",
+    "year": "2024",
+    "make": "Peugeot",
+    "model": "A8",
+    "color": "lime",
+    "vin": "S9GBVHFCJEEE73348"
+  },
+  {
+    "license_plate_number": "AFL0056",
+    "license_plate_state": "CO",
+    "year": "2025",
+    "make": "BYD",
+    "model": "ATS",
+    "color": "grey",
+    "vin": "7P0MUAWAYLFL11989"
+  },
+  {
+    "license_plate_number": "AFL0057",
+    "license_plate_state": "CT",
+    "year": "2026",
+    "make": "Ford",
+    "model": "CTS",
+    "color": "orchid",
+    "vin": "S97ZLCJ7PLBC81159"
+  },
+  {
+    "license_plate_number": "AFL0058",
+    "license_plate_state": "DE",
+    "year": "2026",
+    "make": "Suzuki",
+    "model": "Focus",
+    "color": "turquoise",
+    "vin": "0TPDVTCR7DWN84397"
+  },
+  {
+    "license_plate_number": "AFL0059",
+    "license_plate_state": "FL",
+    "year": "2024",
+    "make": "BYD",
+    "model": "Model T",
+    "color": "pink",
+    "vin": "66MZ5EDFY8HZ10456"
+  },
+  {
+    "license_plate_number": "AFL0060",
+    "license_plate_state": "GA",
+    "year": "2024",
+    "make": "Nissan",
+    "model": "Prius",
+    "color": "red",
+    "vin": "CHAJGXCKTSN629639"
+  },
+  {
+    "license_plate_number": "AFL0061",
+    "license_plate_state": "HI",
+    "year": "2023",
+    "make": "Smart",
+    "model": "Ranchero",
+    "color": "purple",
+    "vin": "TC1F29MF0UHX17573"
+  },
+  {
+    "license_plate_number": "AFL0062",
+    "license_plate_state": "ID",
+    "year": "2023",
+    "make": "Mazda",
+    "model": "F-150",
+    "color": "blue",
+    "vin": "14SUUGAMXRPY83696"
+  },
+  {
+    "license_plate_number": "AFL0063",
+    "license_plate_state": "IL",
+    "year": "2025",
+    "make": "Maruti",
+    "model": "Durango",
+    "color": "tan",
+    "vin": "LC0PYTR96XNV31572"
+  },
+  {
+    "license_plate_number": "AFL0064",
+    "license_plate_state": "IN",
+    "year": "2023",
+    "make": "Aston Martin",
+    "model": "Camry",
+    "color": "ivory",
+    "vin": "ZZE9HRGJFEUP48782"
+  },
+  {
+    "license_plate_number": "AFL0065",
+    "license_plate_state": "IA",
+    "year": "2023",
+    "make": "Ford",
+    "model": "Model Y",
+    "color": "orchid",
+    "vin": "7TLD2XPFXMVE22368"
+  },
+  {
+    "license_plate_number": "AFL0066",
+    "license_plate_state": "KS",
+    "year": "2023",
+    "make": "Mahindra & Mahindra",
+    "model": "Malibu",
+    "color": "mint green",
+    "vin": "VD2W147WE5X043090"
+  },
+  {
+    "license_plate_number": "AFL0067",
+    "license_plate_state": "KY",
+    "year": "2025",
+    "make": "Renault",
+    "model": "Mercielago",
+    "color": "red",
+    "vin": "YAA72V4TPKVU55175"
+  },
+  {
+    "license_plate_number": "AFL0068",
+    "license_plate_state": "LA",
+    "year": "2026",
+    "make": "Mahindra & Mahindra",
+    "model": "Focus",
+    "color": "orange",
+    "vin": "PNNRS87NRZY788978"
+  },
+  {
+    "license_plate_number": "AFL0069",
+    "license_plate_state": "ME",
+    "year": "2026",
+    "make": "Bentley",
+    "model": "Model S",
+    "color": "white",
+    "vin": "X4S00FMFLSL360076"
+  },
+  {
+    "license_plate_number": "AFL0070",
+    "license_plate_state": "MD",
+    "year": "2024",
+    "make": "Mitsubishi",
+    "model": "A8",
+    "color": "black",
+    "vin": "JT7V9L39BYN960499"
+  },
+  {
+    "license_plate_number": "AFL0071",
+    "license_plate_state": "MA",
+    "year": "2026",
+    "make": "Tata",
+    "model": "Sentra",
+    "color": "teal",
+    "vin": "LGXPJRUEP8TZ71306"
+  },
+  {
+    "license_plate_number": "AFL0072",
+    "license_plate_state": "MI",
+    "year": "2024",
+    "make": "Renault",
+    "model": "2",
+    "color": "sky blue",
+    "vin": "GV61BB7KAZD952846"
+  },
+  {
+    "license_plate_number": "AFL0073",
+    "license_plate_state": "MN",
+    "year": "2025",
+    "make": "Cadillac",
+    "model": "ATS",
+    "color": "grey",
+    "vin": "CX61GK32PCZ691893"
+  },
+  {
+    "license_plate_number": "AFL0074",
+    "license_plate_state": "MS",
+    "year": "2026",
+    "make": "Jaguar",
+    "model": "ATS",
+    "color": "salmon",
+    "vin": "THBGM31MPFHX15499"
+  },
+  {
+    "license_plate_number": "AFL0075",
+    "license_plate_state": "MO",
+    "year": "2024",
+    "make": "BYD",
+    "model": "Countach",
+    "color": "azure",
+    "vin": "8RJ6CK4BMWKW53701"
+  },
+  {
+    "license_plate_number": "AFL0076",
+    "license_plate_state": "MT",
+    "year": "2023",
+    "make": "Nissan",
+    "model": "Model 3",
+    "color": "ivory",
+    "vin": "K6X772EDXHEC60254"
+  },
+  {
+    "license_plate_number": "AFL0077",
+    "license_plate_state": "NE",
+    "year": "2025",
+    "make": "Mercedes Benz",
+    "model": "Charger",
+    "color": "green",
+    "vin": "KG8EB1D6ULW003614"
+  },
+  {
+    "license_plate_number": "AFL0078",
+    "license_plate_state": "NV",
+    "year": "2026",
+    "make": "Subaru",
+    "model": "Land Cruiser",
+    "color": "tan",
+    "vin": "LY0DW7LV98N819836"
+  },
+  {
+    "license_plate_number": "AFL0079",
+    "license_plate_state": "NH",
+    "year": "2024",
+    "make": "Bugatti",
+    "model": "2",
+    "color": "silver",
+    "vin": "NUD0RBR7JPJ302660"
+  },
+  {
+    "license_plate_number": "AFL0080",
+    "license_plate_state": "NJ",
+    "year": "2026",
+    "make": "Renault",
+    "model": "Spyder",
+    "color": "lavender",
+    "vin": "AS78U0SB94TW05196"
+  },
+  {
+    "license_plate_number": "AFL0081",
+    "license_plate_state": "NM",
+    "year": "2026",
+    "make": "Suzuki",
+    "model": "Grand Caravan",
+    "color": "red",
+    "vin": "KU0CFEZE19NP54351"
+  },
+  {
+    "license_plate_number": "AFL0082",
+    "license_plate_state": "NY",
+    "year": "2024",
+    "make": "Vauxhall",
+    "model": "CTS",
+    "color": "white",
+    "vin": "8S0GFDFSYZE873278"
+  },
+  {
+    "license_plate_number": "AFL0083",
+    "license_plate_state": "NC",
+    "year": "2026",
+    "make": "MG",
+    "model": "LeBaron",
+    "color": "plum",
+    "vin": "3UHUAL8GFHHG22294"
+  },
+  {
+    "license_plate_number": "AFL0084",
+    "license_plate_state": "ND",
+    "year": "2023",
+    "make": "Mini",
+    "model": "Silverado",
+    "color": "grey",
+    "vin": "B4XV1YZPHGF995507"
+  },
+  {
+    "license_plate_number": "AFL0085",
+    "license_plate_state": "OH",
+    "year": "2024",
+    "make": "MG",
+    "model": "Civic",
+    "color": "salmon",
+    "vin": "MG91BDZ5L4V450672"
+  },
+  {
+    "license_plate_number": "AFL0086",
+    "license_plate_state": "OK",
+    "year": "2026",
+    "make": "Skoda",
+    "model": "Model Y",
+    "color": "maroon",
+    "vin": "411VG1LP5SJB83237"
+  },
+  {
+    "license_plate_number": "AFL0087",
+    "license_plate_state": "OR",
+    "year": "2023",
+    "make": "Aston Martin",
+    "model": "LeBaron",
+    "color": "olive",
+    "vin": "WJBCW43AZBZR53342"
+  },
+  {
+    "license_plate_number": "AFL0088",
+    "license_plate_state": "PA",
+    "year": "2025",
+    "make": "Honda",
+    "model": "Mercielago",
+    "color": "turquoise",
+    "vin": "B9NAG9KMG8LA88098"
+  },
+  {
+    "license_plate_number": "AFL0089",
+    "license_plate_state": "RI",
+    "year": "2023",
+    "make": "Aston Martin",
+    "model": "Prius",
+    "color": "orange",
+    "vin": "MRXGAVF2YADE40191"
+  },
+  {
+    "license_plate_number": "AFL0090",
+    "license_plate_state": "SC",
+    "year": "2024",
+    "make": "Tata",
+    "model": "Focus",
+    "color": "blue",
+    "vin": "HZNELE4ZEJR046754"
+  },
+  {
+    "license_plate_number": "AFL0091",
+    "license_plate_state": "SD",
+    "year": "2025",
+    "make": "Kia",
+    "model": "Volt",
+    "color": "red",
+    "vin": "X8R98WFC66L932091"
+  },
+  {
+    "license_plate_number": "AFL0092",
+    "license_plate_state": "TN",
+    "year": "2026",
+    "make": "Chrysler",
+    "model": "V90",
+    "color": "yellow",
+    "vin": "DA5Y3KSZSTHT02218"
+  },
+  {
+    "license_plate_number": "AFL0093",
+    "license_plate_state": "TX",
+    "year": "2026",
+    "make": "Land Rover",
+    "model": "A4",
+    "color": "green",
+    "vin": "NFJ87AB74HZH84253"
+  },
+  {
+    "license_plate_number": "AFL0094",
+    "license_plate_state": "UT",
+    "year": "2024",
+    "make": "Toyota",
+    "model": "XTS",
+    "color": "fuchsia",
+    "vin": "MU5P7XUFBMAV74543"
+  },
+  {
+    "license_plate_number": "AFL0095",
+    "license_plate_state": "VT",
+    "year": "2026",
+    "make": "Hyundai",
+    "model": "Explorer",
+    "color": "pink",
+    "vin": "29YC6M6P30CD87736"
+  },
+  {
+    "license_plate_number": "AFL0096",
+    "license_plate_state": "VA",
+    "year": "2024",
+    "make": "Chrysler",
+    "model": "Beetle",
+    "color": "black",
+    "vin": "TDYZW1E3NRYH05452"
+  },
+  {
+    "license_plate_number": "AFL0097",
+    "license_plate_state": "WA",
+    "year": "2025",
+    "make": "Rolls Royce",
+    "model": "A4",
+    "color": "lavender",
+    "vin": "WM9KR3SCFJPA19090"
+  },
+  {
+    "license_plate_number": "AFL0098",
+    "license_plate_state": "WV",
+    "year": "2026",
+    "make": "Audi",
+    "model": "Countach",
+    "color": "purple",
+    "vin": "3DDK8J71A2PY58174"
+  },
+  {
+    "license_plate_number": "AFL0099",
+    "license_plate_state": "WI",
+    "year": "2025",
+    "make": "Subaru",
+    "model": "Roadster",
+    "color": "cyan",
+    "vin": "Y753BEC6CUVU10221"
+  },
+  {
+    "license_plate_number": "AFL0100",
+    "license_plate_state": "WY",
+    "year": "2023",
+    "make": "Vauxhall",
+    "model": "Corvette",
+    "color": "white",
+    "vin": "PR8XV82US6BZ34994"
   },
   {
     "license_plate_number": "AFK0081",
@@ -725,7 +905,7 @@
     "year": "2024",
     "make": "Volkswagen",
     "model": "V90",
-    "color": "maroon",
+    "color": "delta",
     "vin": "FTMCFNT5JVB732472"
   },
   {
@@ -734,7 +914,7 @@
     "year": "2023",
     "make": "Mini",
     "model": "Jetta",
-    "color": "indigo",
+    "color": "delta",
     "vin": "TYX3209111YT78847"
   },
   {
@@ -743,7 +923,7 @@
     "year": "2026",
     "make": "Ford",
     "model": "Element",
-    "color": "maroon",
+    "color": "delta",
     "vin": "U8A7UYK48GBV41291"
   },
   {
@@ -752,7 +932,7 @@
     "year": "2024",
     "make": "Mini",
     "model": "Cruze",
-    "color": "white",
+    "color": "delta",
     "vin": "2LA2MN4BMJFP83387"
   },
   {
@@ -761,7 +941,7 @@
     "year": "2026",
     "make": "Kia",
     "model": "Golf",
-    "color": "olive",
+    "color": "delta",
     "vin": "4DTBKKHJ7ARG88882"
   },
   {
@@ -770,7 +950,7 @@
     "year": "2023",
     "make": "Land Rover",
     "model": "Grand Cherokee",
-    "color": "violet",
+    "color": "delta",
     "vin": "RJZ3NFTKN9RD61467"
   },
   {
@@ -779,7 +959,7 @@
     "year": "2025",
     "make": "Smart",
     "model": "Roadster",
-    "color": "lavender",
+    "color": "delta",
     "vin": "9FFEPMS3NWNV16838"
   },
   {
@@ -788,7 +968,7 @@
     "year": "2026",
     "make": "Tesla",
     "model": "A4",
-    "color": "grey",
+    "color": "delta",
     "vin": "8P5VKYC5BEMX05930"
   },
   {
@@ -797,7 +977,7 @@
     "year": "2023",
     "make": "Honda",
     "model": "Challenger",
-    "color": "gold",
+    "color": "delta",
     "vin": "7UN20LK79EE211825"
   },
   {
@@ -806,187 +986,7 @@
     "year": "2023",
     "make": "Ford",
     "model": "Altima",
-    "color": "purple",
+    "color": "delta",
     "vin": "G6LE1W2WA4WU46467"
-  },
-  {
-    "license_plate_number": "AFK0091",
-    "license_plate_state": "SD",
-    "year": "2025",
-    "make": "Tata",
-    "model": "1",
-    "color": "red",
-    "vin": "LG36UB3SECTN63452"
-  },
-  {
-    "license_plate_number": "AFK0092",
-    "license_plate_state": "TN",
-    "year": "2026",
-    "make": "Rivian",
-    "model": "Civic",
-    "color": "red",
-    "vin": "P7TGP1AEWPE007240"
-  },
-  {
-    "license_plate_number": "AFK0093",
-    "license_plate_state": "TX",
-    "year": "2024",
-    "make": "Rolls Royce",
-    "model": "Spyder",
-    "color": "purple",
-    "vin": "5AB8S4434PW076995"
-  },
-  {
-    "license_plate_number": "AFK0094",
-    "license_plate_state": "UT",
-    "year": "2026",
-    "make": "Peugeot",
-    "model": "911",
-    "color": "sky blue",
-    "vin": "8ATF0184V5NN33824"
-  },
-  {
-    "license_plate_number": "AFK0095",
-    "license_plate_state": "VT",
-    "year": "2026",
-    "make": "Kia",
-    "model": "Model X",
-    "color": "olive",
-    "vin": "T9CF74AV8DAB10359"
-  },
-  {
-    "license_plate_number": "AFK0096",
-    "license_plate_state": "VA",
-    "year": "2026",
-    "make": "Nissan",
-    "model": "A4",
-    "color": "lime",
-    "vin": "R7LY0RNBS9HU65702"
-  },
-  {
-    "license_plate_number": "AFK0097",
-    "license_plate_state": "WA",
-    "year": "2025",
-    "make": "BMW",
-    "model": "ATS",
-    "color": "turquoise",
-    "vin": "Y2A9U7FD3VF691689"
-  },
-  {
-    "license_plate_number": "AFK0098",
-    "license_plate_state": "WV",
-    "year": "2023",
-    "make": "Kia",
-    "model": "Grand Caravan",
-    "color": "ivory",
-    "vin": "2WYYAFYY5FXP03335"
-  },
-  {
-    "license_plate_number": "AFK0099",
-    "license_plate_state": "WI",
-    "year": "2026",
-    "make": "Lamborghini",
-    "model": "Prius",
-    "color": "indigo",
-    "vin": "5UK78M7DDHD248658"
-  },
-  {
-    "license_plate_number": "AFK0100",
-    "license_plate_state": "WY",
-    "year": "2025",
-    "make": "Land Rover",
-    "model": "Cruze",
-    "color": "magenta",
-    "vin": "T8JD07NEEEXD72562"
-  },
-  {
-    "license_plate_number": "AFJ0081",
-    "license_plate_state": "NM",
-    "year": "2025",
-    "make": "Jeep",
-    "model": "Beetle",
-    "color": "delta",
-    "vin": "1PSYUHLYSDR430014"
-  },
-  {
-    "license_plate_number": "AFJ0082",
-    "license_plate_state": "NY",
-    "year": "2025",
-    "make": "Rivian",
-    "model": "Model T",
-    "color": "delta",
-    "vin": "V1G4W68AT6KY53194"
-  },
-  {
-    "license_plate_number": "AFJ0083",
-    "license_plate_state": "NC",
-    "year": "2026",
-    "make": "Cadillac",
-    "model": "Escalade",
-    "color": "delta",
-    "vin": "67NG1GP348X926201"
-  },
-  {
-    "license_plate_number": "AFJ0084",
-    "license_plate_state": "ND",
-    "year": "2025",
-    "make": "Dodge",
-    "model": "A4",
-    "color": "delta",
-    "vin": "CMPU8T75SVXS47826"
-  },
-  {
-    "license_plate_number": "AFJ0085",
-    "license_plate_state": "OH",
-    "year": "2025",
-    "make": "Mini",
-    "model": "CTS",
-    "color": "delta",
-    "vin": "ZK4DKME88EA851352"
-  },
-  {
-    "license_plate_number": "AFJ0086",
-    "license_plate_state": "OK",
-    "year": "2025",
-    "make": "Volvo",
-    "model": "Fortwo",
-    "color": "delta",
-    "vin": "6BE7KC86HWA340219"
-  },
-  {
-    "license_plate_number": "AFJ0087",
-    "license_plate_state": "OR",
-    "year": "2025",
-    "make": "Volvo",
-    "model": "Focus",
-    "color": "delta",
-    "vin": "BRVN52PY3BGD86057"
-  },
-  {
-    "license_plate_number": "AFJ0088",
-    "license_plate_state": "PA",
-    "year": "2024",
-    "make": "BYD",
-    "model": "Countach",
-    "color": "delta",
-    "vin": "WZR1YAYEFZZP57873"
-  },
-  {
-    "license_plate_number": "AFJ0089",
-    "license_plate_state": "RI",
-    "year": "2026",
-    "make": "Mercedes Benz",
-    "model": "Model S",
-    "color": "delta",
-    "vin": "FPA0JPVEL9D019545"
-  },
-  {
-    "license_plate_number": "AFJ0090",
-    "license_plate_state": "SC",
-    "year": "2025",
-    "make": "NIO",
-    "model": "Jetta",
-    "color": "delta",
-    "vin": "A6EJ1SEVRFP487258"
   }
 ]

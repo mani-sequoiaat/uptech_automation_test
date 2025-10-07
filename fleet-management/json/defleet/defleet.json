@@ -1,92 +1,92 @@
 [
   {
-    "license_plate_number": "AFJ0091",
+    "license_plate_number": "AFK0091",
     "license_plate_state": "SD",
-    "year": "2023",
-    "make": "Aston Martin",
-    "model": "Camaro",
-    "color": "yellow",
-    "vin": "SK7L0PP73UYJ75616"
+    "year": "2025",
+    "make": "Tata",
+    "model": "1",
+    "color": "red",
+    "vin": "LG36UB3SECTN63452"
   },
   {
-    "license_plate_number": "AFJ0092",
+    "license_plate_number": "AFK0092",
     "license_plate_state": "TN",
-    "year": "2023",
-    "make": "Tesla",
-    "model": "Prius",
-    "color": "pink",
-    "vin": "DHTRSAGGN3UX04910"
-  },
-  {
-    "license_plate_number": "AFJ0093",
-    "license_plate_state": "TX",
-    "year": "2023",
-    "make": "Lamborghini",
-    "model": "2",
-    "color": "orchid",
-    "vin": "ESV9B8GX6GNK83552"
-  },
-  {
-    "license_plate_number": "AFJ0094",
-    "license_plate_state": "UT",
-    "year": "2024",
-    "make": "Maruti",
-    "model": "Spyder",
-    "color": "olive",
-    "vin": "N630F5979FD908417"
-  },
-  {
-    "license_plate_number": "AFJ0095",
-    "license_plate_state": "VT",
     "year": "2026",
-    "make": "Chrysler",
-    "model": "Taurus",
-    "color": "tan",
-    "vin": "3RDWR18FNTGD50426"
+    "make": "Rivian",
+    "model": "Civic",
+    "color": "red",
+    "vin": "P7TGP1AEWPE007240"
   },
   {
-    "license_plate_number": "AFJ0096",
-    "license_plate_state": "VA",
+    "license_plate_number": "AFK0093",
+    "license_plate_state": "TX",
     "year": "2024",
     "make": "Rolls Royce",
-    "model": "V90",
-    "color": "olive",
-    "vin": "1NT5B0KX47MG58822"
-  },
-  {
-    "license_plate_number": "AFJ0097",
-    "license_plate_state": "WA",
-    "year": "2023",
-    "make": "BYD",
-    "model": "Grand Caravan",
-    "color": "magenta",
-    "vin": "ZCMNH4Z38SS441409"
-  },
-  {
-    "license_plate_number": "AFJ0098",
-    "license_plate_state": "WV",
-    "year": "2025",
-    "make": "Hyundai",
-    "model": "PT Cruiser",
+    "model": "Spyder",
     "color": "purple",
-    "vin": "6CCNFD55B2HK33387"
+    "vin": "5AB8S4434PW076995"
   },
   {
-    "license_plate_number": "AFJ0099",
-    "license_plate_state": "WI",
-    "year": "2024",
-    "make": "Rivian",
-    "model": "Charger",
-    "color": "gold",
-    "vin": "7JSBTJ06V9CR00124"
+    "license_plate_number": "AFK0094",
+    "license_plate_state": "UT",
+    "year": "2026",
+    "make": "Peugeot",
+    "model": "911",
+    "color": "sky blue",
+    "vin": "8ATF0184V5NN33824"
   },
   {
-    "license_plate_number": "AFJ0100",
-    "license_plate_state": "WY",
+    "license_plate_number": "AFK0095",
+    "license_plate_state": "VT",
+    "year": "2026",
+    "make": "Kia",
+    "model": "Model X",
+    "color": "olive",
+    "vin": "T9CF74AV8DAB10359"
+  },
+  {
+    "license_plate_number": "AFK0096",
+    "license_plate_state": "VA",
+    "year": "2026",
+    "make": "Nissan",
+    "model": "A4",
+    "color": "lime",
+    "vin": "R7LY0RNBS9HU65702"
+  },
+  {
+    "license_plate_number": "AFK0097",
+    "license_plate_state": "WA",
+    "year": "2025",
+    "make": "BMW",
+    "model": "ATS",
+    "color": "turquoise",
+    "vin": "Y2A9U7FD3VF691689"
+  },
+  {
+    "license_plate_number": "AFK0098",
+    "license_plate_state": "WV",
     "year": "2023",
-    "make": "Toyota",
-    "model": "Corvette",
-    "color": "violet",
-    "vin": "KKCJFGGVVWYJ52605"
+    "make": "Kia",
+    "model": "Grand Caravan",
+    "color": "ivory",
+    "vin": "2WYYAFYY5FXP03335"
+  },
+  {
+    "license_plate_number": "AFK0099",
+    "license_plate_state": "WI",
+    "year": "2026",
+    "make": "Lamborghini",
+    "model": "Prius",
+    "color": "indigo",
+    "vin": "5UK78M7DDHD248658"
+  },
+  {
+    "license_plate_number": "AFK0100",
+    "license_plate_state": "WY",
+    "year": "2025",
+    "make": "Land Rover",
+    "model": "Cruze",
+    "color": "magenta",
+    "vin": "T8JD07NEEEXD72562"
   }
 ]

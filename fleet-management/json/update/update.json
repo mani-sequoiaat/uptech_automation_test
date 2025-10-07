@@ -1,92 +1,92 @@
 [
   {
-    "license_plate_number": "AFJ0081",
+    "license_plate_number": "AFK0081",
     "license_plate_state": "NM",
-    "year": "2025",
-    "make": "Jeep",
-    "model": "Beetle",
-    "color": "delta",
-    "vin": "1PSYUHLYSDR430014"
-  },
-  {
-    "license_plate_number": "AFJ0082",
-    "license_plate_state": "NY",
-    "year": "2025",
-    "make": "Rivian",
-    "model": "Model T",
-    "color": "delta",
-    "vin": "V1G4W68AT6KY53194"
-  },
-  {
-    "license_plate_number": "AFJ0083",
-    "license_plate_state": "NC",
-    "year": "2026",
-    "make": "Cadillac",
-    "model": "Escalade",
-    "color": "delta",
-    "vin": "67NG1GP348X926201"
-  },
-  {
-    "license_plate_number": "AFJ0084",
-    "license_plate_state": "ND",
-    "year": "2025",
-    "make": "Dodge",
-    "model": "A4",
-    "color": "delta",
-    "vin": "CMPU8T75SVXS47826"
-  },
-  {
-    "license_plate_number": "AFJ0085",
-    "license_plate_state": "OH",
-    "year": "2025",
-    "make": "Mini",
-    "model": "CTS",
-    "color": "delta",
-    "vin": "ZK4DKME88EA851352"
-  },
-  {
-    "license_plate_number": "AFJ0086",
-    "license_plate_state": "OK",
-    "year": "2025",
-    "make": "Volvo",
-    "model": "Fortwo",
-    "color": "delta",
-    "vin": "6BE7KC86HWA340219"
-  },
-  {
-    "license_plate_number": "AFJ0087",
-    "license_plate_state": "OR",
-    "year": "2025",
-    "make": "Volvo",
-    "model": "Focus",
-    "color": "delta",
-    "vin": "BRVN52PY3BGD86057"
-  },
-  {
-    "license_plate_number": "AFJ0088",
-    "license_plate_state": "PA",
     "year": "2024",
-    "make": "BYD",
-    "model": "Countach",
+    "make": "Volkswagen",
+    "model": "V90",
     "color": "delta",
-    "vin": "WZR1YAYEFZZP57873"
+    "vin": "FTMCFNT5JVB732472"
   },
   {
-    "license_plate_number": "AFJ0089",
-    "license_plate_state": "RI",
-    "year": "2026",
-    "make": "Mercedes Benz",
-    "model": "Model S",
-    "color": "delta",
-    "vin": "FPA0JPVEL9D019545"
-  },
-  {
-    "license_plate_number": "AFJ0090",
-    "license_plate_state": "SC",
-    "year": "2025",
-    "make": "NIO",
+    "license_plate_number": "AFK0082",
+    "license_plate_state": "NY",
+    "year": "2023",
+    "make": "Mini",
     "model": "Jetta",
     "color": "delta",
-    "vin": "A6EJ1SEVRFP487258"
+    "vin": "TYX3209111YT78847"
+  },
+  {
+    "license_plate_number": "AFK0083",
+    "license_plate_state": "NC",
+    "year": "2026",
+    "make": "Ford",
+    "model": "Element",
+    "color": "delta",
+    "vin": "U8A7UYK48GBV41291"
+  },
+  {
+    "license_plate_number": "AFK0084",
+    "license_plate_state": "ND",
+    "year": "2024",
+    "make": "Mini",
+    "model": "Cruze",
+    "color": "delta",
+    "vin": "2LA2MN4BMJFP83387"
+  },
+  {
+    "license_plate_number": "AFK0085",
+    "license_plate_state": "OH",
+    "year": "2026",
+    "make": "Kia",
+    "model": "Golf",
+    "color": "delta",
+    "vin": "4DTBKKHJ7ARG88882"
+  },
+  {
+    "license_plate_number": "AFK0086",
+    "license_plate_state": "OK",
+    "year": "2023",
+    "make": "Land Rover",
+    "model": "Grand Cherokee",
+    "color": "delta",
+    "vin": "RJZ3NFTKN9RD61467"
+  },
+  {
+    "license_plate_number": "AFK0087",
+    "license_plate_state": "OR",
+    "year": "2025",
+    "make": "Smart",
+    "model": "Roadster",
+    "color": "delta",
+    "vin": "9FFEPMS3NWNV16838"
+  },
+  {
+    "license_plate_number": "AFK0088",
+    "license_plate_state": "PA",
+    "year": "2026",
+    "make": "Tesla",
+    "model": "A4",
+    "color": "delta",
+    "vin": "8P5VKYC5BEMX05930"
+  },
+  {
+    "license_plate_number": "AFK0089",
+    "license_plate_state": "RI",
+    "year": "2023",
+    "make": "Honda",
+    "model": "Challenger",
+    "color": "delta",
+    "vin": "7UN20LK79EE211825"
+  },
+  {
+    "license_plate_number": "AFK0090",
+    "license_plate_state": "SC",
+    "year": "2023",
+    "make": "Ford",
+    "model": "Altima",
+    "color": "delta",
+    "vin": "G6LE1W2WA4WU46467"
   }
 ]

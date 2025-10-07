@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const path = require('path');
 const dayjs = require('dayjs');
@@ -5,15 +6,8 @@ const { createObjectCsvWriter } = require('csv-writer');
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
 const entryExitCombinations = [
-  { entry_plaza: 'Holland Tunnel Plaza', exit_plaza: 'Lincoln Tunnel Plaza', amount: 16.06 },
-  { entry_plaza: 'George Washington Bridge', exit_plaza: 'Outerbridge Crossing', amount: 14.06 },
-];
-
-const agencies = [
-  'E-ZPass New York',
-  'EZ Pass NY',
-  'E-ZPass NY',
-  'EZPass New York',
+  { entry_plaza: 'Benicia', exit_plaza: 'Benicia', amount: 8.0 },
+  { entry_plaza: 'Richmond', exit_plaza: 'Richmond', amount: 7.5 },
 ];
 
 function randomChoice(arr) {
@@ -33,14 +27,14 @@ async function main() {
 
   const client = await getDbClient();
 
-  // Use relative path for SQL file
+ 
   const sqlFilePath = path.join(__dirname, '../SQL/Active_fleet_RA.sql');
 
   let query;
   try {
     query = fs.readFileSync(sqlFilePath, 'utf8');
   } catch (err) {
-    console.error(`❌ Failed to read SQL file at ${sqlFilePath}:`, err);
+    console.error(`Failed to read SQL file at ${sqlFilePath}:`, err);
     process.exit(1);
   }
 
@@ -79,48 +73,52 @@ async function main() {
     const plaza = randomChoice(entryExitCombinations);
 
     tollRecords.push({
-      'Lane Txn ID': generateLaneId(1211 + laneCounter++),
-      'Tag/Plate #': `${row.license_plate_number}-${row.license_plate_state}`,
-      'Posted Date': postedDate.format('YYYYMMDD'),
-      'Agency': randomChoice(agencies),
-      'Entry Plaza': plaza.entry_plaza,
-      'Exit Plaza': plaza.exit_plaza,
-      'Class': '',
-      'Date': transactionDate.format('YYYYMMDD'),
-      'Time': dayjs().format('HHmmss'),
-      'Amount': plaza.amount.toFixed(2),
-      'Post Txn Balance': 1,
+      'POSTED DATE': postedDate.format('MM/DD/YYYY'),
+      'TRANSACTION DATE': transactionDate.format('MM/DD/YYYY'),
+      'TRANSACTION TIME': dayjs().format('h:mm:ss A'),
+      'TOLL TAG # / PLATE #': `${row.license_plate_number}-${row.license_plate_state}`,
+      'EXIT PLAZA': plaza.exit_plaza,
+      'EXIT LANE': 7,
+      'ENTRY DATE/TIME': '',
+      'ENTRY PLAZA': plaza.entry_plaza,
+      'ENTRY LANE': '',
+      'DEBIT(-)': `$${plaza.amount.toFixed(2)}`,
+      'CREDIT(+)': '',
+      'BALANCE': '',
     });
+
+    laneCounter++;
   }
 
-  // Output directory (relative)
-  const outputDir = path.join(__dirname, '../generated-toll-files/ezpassny');
+  
+  const outputDir = path.join(__dirname, '../generated-toll-files/tca');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const fileName = `ezpassny-toll-${dayjs().format('YYYYMMDDHHmmss')}.csv`;
+  const fileName = `BATA_${dayjs().format('YYYYMMDDHHmmss')}.csv`;
   const outputPath = path.join(outputDir, fileName);
 
   const csvWriter = createObjectCsvWriter({
     path: outputPath,
     header: [
-      { id: 'Lane Txn ID', title: 'Lane Txn ID' },
-      { id: 'Tag/Plate #', title: 'Tag/Plate #' },
-      { id: 'Posted Date', title: 'Posted Date' },
-      { id: 'Agency', title: 'Agency' },
-      { id: 'Entry Plaza', title: 'Entry Plaza' },
-      { id: 'Exit Plaza', title: 'Exit Plaza' },
-      { id: 'Class', title: 'Class' },
-      { id: 'Date', title: 'Date' },
-      { id: 'Time', title: 'Time' },
-      { id: 'Amount', title: 'Amount' },
-      { id: 'Post Txn Balance', title: 'Post Txn Balance' },
+      { id: 'POSTED DATE', title: 'POSTED DATE' },
+      { id: 'TRANSACTION DATE', title: 'TRANSACTION DATE' },
+      { id: 'TRANSACTION TIME', title: 'TRANSACTION TIME' },
+      { id: 'TOLL TAG # / PLATE #', title: 'TOLL TAG # / PLATE #' },
+      { id: 'EXIT PLAZA', title: 'EXIT PLAZA' },
+      { id: 'EXIT LANE', title: 'EXIT LANE' },
+      { id: 'ENTRY DATE/TIME', title: 'ENTRY DATE/TIME' },
+      { id: 'ENTRY PLAZA', title: 'ENTRY PLAZA' },
+      { id: 'ENTRY LANE', title: 'ENTRY LANE' },
+      { id: 'DEBIT(-)', title: 'DEBIT(-)' },
+      { id: 'CREDIT(+)', title: 'CREDIT(+)' },
+      { id: 'BALANCE', title: 'BALANCE' },
     ],
   });
 
   await csvWriter.writeRecords(tollRecords);
-  console.log(`EZPassNY Toll file generated successfully: ${outputPath}`);
+  console.log(`BATA Toll file generated successfully: ${outputPath}`);
   console.log(`Total records: ${tollRecords.length}`);
 
   await closeDbClient();
@@ -128,7 +126,7 @@ async function main() {
 }
 
 main().catch(async (err) => {
-  console.error('Error generating toll file:', err);
+  console.error('Error generating TCA toll file:', err);
   await closeDbClient();
   process.exit(1);
 });
