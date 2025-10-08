@@ -6,8 +6,9 @@ const { createObjectCsvWriter } = require('csv-writer');
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
 const entryExitCombinations = [
-  { entry_plaza: 'Benicia', exit_plaza: 'Benicia', amount: 8.0 },
-  { entry_plaza: 'Richmond', exit_plaza: 'Richmond', amount: 7.5 },
+  { exit_plaza: 'Carquinez Bridge', amount: 8.0 },
+  { exit_plaza: 'Benicia', amount: 8.0 },
+  { exit_plaza: 'Bay Bridge', amount: 4.0 },
 ];
 
 function randomChoice(arr) {
@@ -21,7 +22,7 @@ function generateLaneId(index) {
 async function main() {
   const count = parseInt(process.argv[2], 10);
   if (!count || count <= 0) {
-    console.error('Please provide a valid count.');
+    console.error('Provide a valid count.');
     process.exit(1);
   }
 
@@ -80,7 +81,7 @@ async function main() {
       'EXIT PLAZA': plaza.exit_plaza,
       'EXIT LANE': 7,
       'ENTRY DATE/TIME': '',
-      'ENTRY PLAZA': plaza.entry_plaza,
+      'ENTRY PLAZA': '',
       'ENTRY LANE': '',
       'DEBIT(-)': `$${plaza.amount.toFixed(2)}`,
       'CREDIT(+)': '',
@@ -91,7 +92,7 @@ async function main() {
   }
 
   
-  const outputDir = path.join(__dirname, '../generated-toll-files/tca');
+  const outputDir = path.join(__dirname, '../generated-toll-files/bata');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }

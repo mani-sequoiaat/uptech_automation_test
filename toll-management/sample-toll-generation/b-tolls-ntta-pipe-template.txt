@@ -1,6 +1,0 @@
-{{ num_b_agreement_data  }}
-{%- if b_agreement_data.size > 0 -%}
-{% for ba in b_agreement_data %}
-{{ ba.agreement_number }},{{ ba.brand }},{{ ba.license_plate_number }},{{ ba.license_plate_state }},{{ ba.make }},{{ ba.model }},{{ ba.rental_customer_type_id }},{{ ba.corporate_account }},{{ ba.checkout_location_group }},{{ ba.checkout_location_code }},{{ ba.checkout_location_name }},{{ ba.checkout_address_1 }},{{ ba.checkout_address_2 }},{{ ba.checkout_city }},{{ ba.checkout_state }},{{ ba.checkout_zipcode }},{{ ba.checkout_datetime }},{{ ba.estimated_checkin_location_group }},{{ ba.estimated_checkin_location_code }},{{ ba.estimated_checkin_location_name }},{{ ba.estimated_checkin_address_1 }},{{ ba.estimated_checkin_address_2 }},{{ ba.estimated_checkin_city }},{{ ba.estimated_checkin_state }},{{ ba.estimated_checkin_zipcode }},{{ ba.estimated_checkin_datetime }},{{ ba.checkin_location_group }},{{ ba.checkin_location_code }},{{ ba.checkin_location_name }},{{ ba.checkin_address_1 }},{{ ba.checkin_address_2 }},{{ ba.checkin_city }},{{ ba.checkin_state }},{{ ba.checkin_zipcode }},{{ ba.checkin_datetime }},{{ ba.swap_indicator }},{{ ba.swap_datetime }}
-{%- endfor %}
-{%- endif -%}
