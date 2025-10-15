@@ -19,7 +19,7 @@ function randomChoice(arr) {
 async function main() {
   const count = parseInt(process.argv[2], 10);
   if (!count || count <= 0) {
-    console.error('Please provide a valid record count. Example: node e470.js 20');
+    console.error(' Please provide a valid record count. Example: node e470.js 20');
     process.exit(1);
   }
 
@@ -29,13 +29,13 @@ async function main() {
   try {
     query = fs.readFileSync(sqlFilePath, 'utf8');
   } catch (err) {
-    console.error(`Failed to read SQL file at ${sqlFilePath}:`, err);
+    console.error(` Failed to read SQL file at ${sqlFilePath}:`, err);
     process.exit(1);
   }
 
   const { rows } = await client.query(query);
   if (!rows.length) {
-    console.error('No active Fleet + Agreement records found.');
+    console.error(' No active Fleet + Agreement records found.');
     await closeDbClient();
     process.exit(2);
   }
@@ -43,13 +43,14 @@ async function main() {
   const outputDir = path.join(__dirname, '../generated-toll-files/e470');
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-  const now = dayjs();
-  const currentHHmmss = { hour: now.hour(), minute: now.minute(), second: now.second() };
-  const fileName = `E470_${now.format('YYYYMMDDHHmmss')}.txt`;
+  const fileDate = dayjs();
+  const fileName = `E470_${fileDate.format('YYYYMMDDHHmmss')}.txt`;
   const outputPath = path.join(outputDir, fileName);
 
   const direction = 'D';
   const typeCode = 1;
+  const daysToAdd = 5; // posted_date = txn_date + 5 days
+  const nowTime = dayjs();
 
   const lines = [];
   let totalToll = 0;
@@ -57,22 +58,19 @@ async function main() {
 
   for (let i = 0; i < Math.min(count, rows.length); i++) {
     const row = rows[i];
-    const checkout = dayjs(row.checkout_datetime);
 
-    // Transaction date = checkout + 1 day
-    let transactionDate = checkout.add(1, 'day')
-      .hour(currentHHmmss.hour)
-      .minute(currentHHmmss.minute)
-      .second(currentHHmmss.second);
-
-    // Ensure transaction date is never in the future
-    const yesterday = dayjs().subtract(1, 'day');
-    if (transactionDate.isAfter(yesterday)) {
-      transactionDate = yesterday.hour(23).minute(59).second(59);
+    if (!row.license_plate_number || !row.license_plate_state) {
+      console.warn(`Skipping record due to missing LPN or LPS: ${JSON.stringify(row)}`);
+      continue;
     }
 
-    // Posted date = transactionDate - 2 days
-    const postedDate = transactionDate.subtract(2, 'day');
+    // Transaction date = checkout + 1 day, use current HHmmss, cap to now
+    let txnDate = dayjs(row.checkout_datetime).add(1, 'day');
+    txnDate = txnDate.hour(nowTime.hour()).minute(nowTime.minute()).second(nowTime.second());
+    if (txnDate.isAfter(nowTime)) txnDate = nowTime;
+
+    // Posted date = txnDate + daysToAdd
+    const postedDate = txnDate.add(daysToAdd, 'day');
 
     const loc = randomChoice(tollLocations);
     const total = (loc.toll + (Math.random() * 5 + 1)).toFixed(2); // random total
@@ -83,7 +81,7 @@ async function main() {
     lines.push([
       row.license_plate_state,
       row.license_plate_number,
-      transactionDate.format('YYYYMMDD-HHmmss'),
+      txnDate.format('YYYYMMDD-HHmmss'),
       loc.code,
       typeCode,
       postedDate.format('YYYYMMDD-HHmmss'),
@@ -103,17 +101,17 @@ async function main() {
 
   fs.writeFileSync(outputPath, lines.join('\n'), 'utf8');
 
-  console.log('✅ E470 Toll file generated successfully!');
-  console.log(`📁 Location: ${outputPath}`);
-  console.log(`🧾 Total records: ${lines.length - 1}`);
-  console.log(`💲 Total Toll: ${totalToll.toFixed(2)}, Total Amount: ${totalAmount.toFixed(2)}`);
+  console.log(' E470 Toll file generated successfully!');
+  console.log(` Location: ${outputPath}`);
+  console.log(` Total records: ${lines.length - 1}`);
+  console.log(` Total Toll: ${totalToll.toFixed(2)}, Total Amount: ${totalAmount.toFixed(2)}`);
 
   await closeDbClient();
   process.exit(0);
 }
 
 main().catch(async (err) => {
-  console.error('❌ Error generating E470 file:', err);
+  console.error(' Error generating E470 file:', err);
   await closeDbClient();
   process.exit(1);
 });

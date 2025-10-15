@@ -4,6 +4,7 @@ const { Liquid } = require('liquidjs');
 const { faker } = require('@faker-js/faker');
 const { DateTime } = require('luxon');
 const Client = require('ssh2-sftp-client');
+const { parse: parseCsvSync } = require('csv-parse/sync'); // add near top requires
 
 const {
   sftpConfig,
@@ -135,10 +136,18 @@ const historyOutputDir  = path.join(jsonBaseDir, 'history_records');
 
 // Splits CSV text into an array of trimmed lines, dropping blank lines and pure-number lines.
 function parseCsvRecords(text) {
-  return text
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line !== '' && !/^[0-9]+$/.test(line));
+  // parse into array of records (no header handling here) using robust CSV parsing
+  const records = parseCsvSync(text, {
+    relax_column_count: true,
+    skip_empty_lines: true,
+    trim: true
+  });
+  // remove any leading count line if it's a single-number first row
+  if (records.length && records[0].length === 1 && /^[0-9]+$/.test(records[0][0])) {
+    records.shift();
+  }
+  // return array of join(',') strings to preserve downstream code, or return arrays and update downstream mappings
+  return records.map(cols => cols.join(','));
 }
 
 
@@ -199,7 +208,8 @@ async function downloadYesterdayFile(localPath, fmt) {
     await sftp.get(remote, localPath);
     return localPath;
   } finally {
-    sftp.end();
+    // ensure connection is closed and wait for it
+    await sftp.end();
   }
 }
 

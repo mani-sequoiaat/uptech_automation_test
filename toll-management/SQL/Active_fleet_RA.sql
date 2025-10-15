@@ -12,4 +12,4 @@ INNER JOIN "FleetAgency".fleet f
 WHERE f.is_active = TRUE
   AND f.fleet_end_date IS NULL
   AND f.registration_end_date IS NULL
-ORDER BY a.id DESC;
+ORDER BY a.id asc;

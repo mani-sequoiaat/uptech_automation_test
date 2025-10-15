@@ -1,92 +1,92 @@
 [
   {
-    "license_plate_number": "AFL0081",
+    "license_plate_number": "AFS0081",
     "license_plate_state": "NM",
-    "year": "2026",
-    "make": "Suzuki",
-    "model": "Grand Caravan",
+    "year": "2024",
+    "make": "Cadillac",
+    "model": "Aventador",
     "color": "delta",
-    "vin": "KU0CFEZE19NP54351"
+    "vin": "EF7NYX44P4FM57554"
   },
   {
-    "license_plate_number": "AFL0082",
+    "license_plate_number": "AFS0082",
     "license_plate_state": "NY",
-    "year": "2024",
-    "make": "Vauxhall",
-    "model": "CTS",
+    "year": "2025",
+    "make": "Nissan",
+    "model": "Land Cruiser",
     "color": "delta",
-    "vin": "8S0GFDFSYZE873278"
+    "vin": "MGZFYHTK7XCC68368"
   },
   {
-    "license_plate_number": "AFL0083",
+    "license_plate_number": "AFS0083",
     "license_plate_state": "NC",
-    "year": "2026",
-    "make": "MG",
-    "model": "LeBaron",
-    "color": "delta",
-    "vin": "3UHUAL8GFHHG22294"
-  },
-  {
-    "license_plate_number": "AFL0084",
-    "license_plate_state": "ND",
-    "year": "2023",
-    "make": "Mini",
-    "model": "Silverado",
-    "color": "delta",
-    "vin": "B4XV1YZPHGF995507"
-  },
-  {
-    "license_plate_number": "AFL0085",
-    "license_plate_state": "OH",
     "year": "2024",
-    "make": "MG",
-    "model": "Civic",
+    "make": "Mini",
+    "model": "Challenger",
     "color": "delta",
-    "vin": "MG91BDZ5L4V450672"
+    "vin": "KMUWLG3DEPDP62364"
   },
   {
-    "license_plate_number": "AFL0086",
-    "license_plate_state": "OK",
+    "license_plate_number": "AFS0084",
+    "license_plate_state": "ND",
     "year": "2026",
-    "make": "Skoda",
-    "model": "Model Y",
+    "make": "Chevrolet",
+    "model": "Malibu",
     "color": "delta",
-    "vin": "411VG1LP5SJB83237"
+    "vin": "ZEXTUGBNTXHR58531"
   },
   {
-    "license_plate_number": "AFL0087",
+    "license_plate_number": "AFS0085",
+    "license_plate_state": "OH",
+    "year": "2023",
+    "make": "Ferrari",
+    "model": "2",
+    "color": "delta",
+    "vin": "NHY9FE5W8LA303124"
+  },
+  {
+    "license_plate_number": "AFS0086",
+    "license_plate_state": "OK",
+    "year": "2023",
+    "make": "Fiat",
+    "model": "Model X",
+    "color": "delta",
+    "vin": "XWRVGM01N9C865089"
+  },
+  {
+    "license_plate_number": "AFS0087",
     "license_plate_state": "OR",
     "year": "2023",
-    "make": "Aston Martin",
-    "model": "LeBaron",
+    "make": "Mini",
+    "model": "Alpine",
     "color": "delta",
-    "vin": "WJBCW43AZBZR53342"
+    "vin": "Y1GZV0601CE456876"
   },
   {
-    "license_plate_number": "AFL0088",
+    "license_plate_number": "AFS0088",
     "license_plate_state": "PA",
-    "year": "2025",
-    "make": "Honda",
-    "model": "Mercielago",
-    "color": "delta",
-    "vin": "B9NAG9KMG8LA88098"
-  },
-  {
-    "license_plate_number": "AFL0089",
-    "license_plate_state": "RI",
     "year": "2023",
-    "make": "Aston Martin",
-    "model": "Prius",
+    "make": "Polestar",
+    "model": "Challenger",
     "color": "delta",
-    "vin": "MRXGAVF2YADE40191"
+    "vin": "AWUSLVWNCXT338702"
   },
   {
-    "license_plate_number": "AFL0090",
-    "license_plate_state": "SC",
+    "license_plate_number": "AFS0089",
+    "license_plate_state": "RI",
     "year": "2024",
-    "make": "Tata",
-    "model": "Focus",
+    "make": "Bugatti",
+    "model": "Model 3",
     "color": "delta",
-    "vin": "HZNELE4ZEJR046754"
+    "vin": "040X93R0XXD782046"
+  },
+  {
+    "license_plate_number": "AFS0090",
+    "license_plate_state": "SC",
+    "year": "2023",
+    "make": "Mercedes Benz",
+    "model": "Expedition",
+    "color": "delta",
+    "vin": "U0KS6HASW9NS62444"
   }
 ]
