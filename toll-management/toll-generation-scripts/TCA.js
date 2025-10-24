@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const dayjs = require('dayjs');
+const dayjs = require('dayjs'); // <-- ADDED DAYJS
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 const outputDir = path.join(__dirname, '../generated-toll-files/tca');
 const sqlFilePath = path.join(__dirname, '../SQL/Active_fleet_RA.sql');
@@ -10,27 +10,29 @@ try {
   sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
 } catch (err) {
   console.error(`Failed to read SQL file at ${sqlFilePath}:`, err);
-  process.exit(1); // Exit if the query file can't be read
+  process.exit(1);
 }
 
 /**
- * Fetches license plate data using the provided database client.
+ * Fetches license plate and agreement data from the database.
  * @param {object} client - The connected 'pg' client object.
- * @returns {Promise<Array<object>>} A promise that resolves to an array of { plate, state }.
+ * @returns {Promise<Array<object>>}
  */
-async function fetchLicensePlates(client) {
+async function fetchAgreementData(client) {
     try {
         console.log('Fetching records from database using external SQL file...');
         const res = await client.query(sqlQuery);
         console.log(`Fetched ${res.rows.length} records.`);
         
-        // Map the results to the simple { plate, state } format
-        const licensePlates = res.rows.map(row => ({
+        // --- UPDATED: Map all required fields ---
+        const agreementData = res.rows.map(row => ({
             plate: row.license_plate_number,
-            state: row.license_plate_state
+            state: row.license_plate_state,
+            checkout_datetime: row.checkout_datetime, // <-- Required for date logic
+            estimated_checkin_datetime: row.estimated_checkin_datetime // <-- Required for date logic
         }));
         
-        return licensePlates;
+        return agreementData;
     } catch (err) {
         console.error('Database query error:', err.stack);
         throw err;
@@ -48,14 +50,14 @@ function padLeft(str, length, char = '0') {
     return String(str).padStart(length, char);
 }
 
-function getMMDDYYYY(date) {
+function getMMDDYYYY(date) { // Accepts a JS Date object
     const mm = padLeft(date.getMonth() + 1, 2);
     const dd = padLeft(date.getDate(), 2);
     const yyyy = date.getFullYear();
     return `${mm}${dd}${yyyy}`;
 }
 
-function getHHMMSS(date) {
+function getHHMMSS(date) { // Accepts a JS Date object
     const hh = padLeft(date.getHours(), 2);
     const mm = padLeft(date.getMinutes(), 2);
     const ss = padLeft(date.getSeconds(), 2);
@@ -66,15 +68,25 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// --- NEW: Helper function for random date generation ---
+/**
+ * Generates a random dayjs object between two dayjs objects.
+ * @param {dayjs.Dayjs} start - The minimum date (inclusive).
+ * @param {dayjs.Dayjs} end - The maximum date (inclusive).
+ * @returns {dayjs.Dayjs} A random dayjs object.
+ */
+function getRandomDateBetween(start, end) {
+    const startTimestamp = start.valueOf();
+    const endTimestamp = end.valueOf();
+    const randomTimestamp = getRandomInt(startTimestamp, endTimestamp);
+    return dayjs(randomTimestamp);
+}
+
 // Sample toll locations from the ICD Appendix
 const tollLocations = [
     { location: 'Bay Bridge-Lane 1', road: 'Bay Bridge' },
     { location: 'San Mateo-Lane 3', road: 'San Mateo Bridge' },
-    { location: 'Dumbarton-Lane 1', road: 'Dumbarton Bridge' },
-    { location: 'Carquinez-Lane 8', road: 'Carquinez Bridge' },
-    { location: 'Catalina View South-Lane 10', road: 'The Toll Roads' },
-    { location: 'Oso Bridge Mainline NB Lane 11', road: 'The Toll Roads' },
-    { location: 'GG Bridge - Lane 5', road: 'Golden Gate Bridge' },
+    // ... (rest of your locations)
     { location: '110NB Rosecrans To Slauson', road: '110 Harbor ExpressLanes' },
     { location: 'Miramar Way NB', road: 'I-15 Express Lanes' }
 ];
@@ -94,16 +106,44 @@ function createHeader(fileName, transmissionDate) {
     return header;
 }
 
-function createDetailRecord(lpnData) {
+/**
+ * Creates a Detail Record string for a single toll transaction.
+ * @param {object} agreementData - The full agreement object from the DB.
+ * @returns {string|null} The formatted Detail record, or null if logic fails.
+ */
+function createDetailRecord(agreementData) {
+    // --- NEW DATE LOGIC ---
+    const checkoutDate = dayjs(agreementData.checkout_datetime);
+    const estimatedCheckinDate = dayjs(agreementData.estimated_checkin_datetime);
+    const today = dayjs();
+
+    // Start date for toll must be *after* checkout
+    const minDate = checkoutDate; 
+    
+    // End date must be *before* estimated check-in OR *before* today,
+    // whichever is earlier.
+    const maxDate = estimatedCheckinDate.isBefore(today) ? estimatedCheckinDate : today;
+
+    // Check for an invalid date range
+    // (e.g., checkout date is in the future, or after the max valid date)
+    if (minDate.isAfter(maxDate)) {
+      console.warn(`Skipping plate ${agreementData.plate}: No valid date range found. (Checkout: ${checkoutDate.format()}, MaxValid: ${maxDate.format()})`);
+      return null; // Signal to skip this record
+    }
+
+    // Generate random toll date and time within the valid range
+    const randomTollDateTime = getRandomDateBetween(minDate, maxDate);
+    const tollDate = getMMDDYYYY(randomTollDateTime.toDate());
+    const tollTime = getHHMMSS(randomTollDateTime.toDate());
+    // --- END NEW DATE LOGIC ---
+
     const randomToll = tollLocations[getRandomInt(0, tollLocations.length - 1)];
     const tollAmount = padLeft(getRandomInt(50, 1500), 6); // $0.50 to $15.00
-    const tollDate = getMMDDYYYY(new Date(Date.now() - getRandomInt(0, 86400000)));
-    const tollTime = getHHMMSS(new Date(Date.now() - getRandomInt(0, 3600000)));
 
     let detail = '';
     detail += padRight('D1', 2); // Fld 1: Record Indicator
-    detail += padRight(lpnData.state, 2); // Fld 2: State
-    detail += padRight(lpnData.plate, 10); // Fld 3: Plate
+    detail += padRight(agreementData.state, 2); // Fld 2: State
+    detail += padRight(agreementData.plate, 10); // Fld 3: Plate
     detail += padRight('', 20); // Fld 4: Transponder Number (Optional)
     detail += padRight(tollDate, 8); // Fld 5: Toll Date
     detail += padRight(tollTime, 6); // Fld 6: Toll Time
@@ -125,21 +165,19 @@ function createTrailer(fileName, transmissionDate, recordCount) {
 
 /**
  * Generates the .tol file using data from the database.
- * @param {Array<object>} licensePlates - Array of { plate, state } objects.
+ * @param {Array<object>} agreementDataList - Array of agreement objects.
  * @param {number} requestedCount - The number of records to generate.
  */
-function generateTollFile(licensePlates, requestedCount) {
-    if (!licensePlates || licensePlates.length === 0) {
-        console.log('No license plates found. Aborting file generation.');
+function generateTollFile(agreementDataList, requestedCount) {
+    if (!agreementDataList || agreementDataList.length === 0) {
+        console.log('No agreement data found. Aborting file generation.');
         return;
     }
 
-    // Check if requested count exceeds available plates
-    let actualRecordCount = requestedCount;
-    if (licensePlates.length < requestedCount) {
-        console.warn(`Warning: Requested ${requestedCount} records, but only ${licensePlates.length} eligible plates found.`);
-        console.warn(`Generating ${licensePlates.length} records instead.`);
-        actualRecordCount = licensePlates.length;
+    // --- UPDATED: Check available records vs. requested count ---
+    if (agreementDataList.length < requestedCount) {
+        console.warn(`Warning: Requested ${requestedCount} records, but only ${agreementDataList.length} eligible agreements found.`);
+        // We *don't* change the requestedCount, as the loop below will handle it.
     }
 
     const now = new Date();
@@ -153,21 +191,43 @@ function generateTollFile(licensePlates, requestedCount) {
     const header = createHeader(fileName, transmissionDate);
     fileContent.push(header);
 
-    // 2. Create Detail Records
-    for (let i = 0; i < actualRecordCount; i++) {
-        const lpn = licensePlates[i]; 
-        const detailRecord = createDetailRecord(lpn);
-        fileContent.push(detailRecord);
-    }
+    // --- NEW LOOP LOGIC (like your BATA script) ---
+    // This smart loop generates the requested number of *valid* records.
+    let recordsGenerated = 0;
+    let agreementIndex = 0;
+    const detailRecords = [];
 
-    // 3. Create Trailer
-    const trailer = createTrailer(fileName, transmissionDate, actualRecordCount);
+    while (recordsGenerated < requestedCount && agreementIndex < agreementDataList.length) {
+        const agreement = agreementDataList[agreementIndex];
+        agreementIndex++; // Move to next agreement
+
+        const detailRecord = createDetailRecord(agreement);
+        
+        if (detailRecord) {
+            detailRecords.push(detailRecord);
+            recordsGenerated++;
+        }
+        // If detailRecord is null, loop continues to try the next agreement
+    }
+    
+    // After loop, check if we still didn't get enough records
+    if (recordsGenerated < requestedCount) {
+         console.warn(`Warning: Could only generate ${recordsGenerated} valid records out of ${requestedCount} requested.`);
+         console.warn(`This may be due to invalid checkout/check-in date ranges.`);
+    }
+    // --- END NEW LOOP LOGIC ---
+
+    // 2. Add all valid detail records
+    fileContent.push(...detailRecords);
+
+    // 3. Create Trailer (use the *actual* number of records generated)
+    const trailer = createTrailer(fileName, transmissionDate, recordsGenerated);
     fileContent.push(trailer);
 
     // Join all lines with a newline character
     const fileString = fileContent.join('\n');
 
-    // --- NEW: Create directory and full output path ---
+    // Create directory and full output path
     try {
         if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true });
@@ -180,14 +240,14 @@ function generateTollFile(licensePlates, requestedCount) {
             if (err) {
                 console.error('Error writing file:', err);
             } else {
-                console.log(`Successfully generated file: ${outputPath}`); // <-- Updated log
-                console.log(`Total detail records written: ${actualRecordCount}`);
+                console.log(`Successfully generated file: ${outputPath}`);
+                // Log the *actual* count
+                console.log(`Total detail records written: ${recordsGenerated}`);
             }
         });
     } catch (err) {
         console.error(`Failed to create output directory or write file:`, err);
     }
-    // --- END NEW ---
 }
 
 // --- Main execution ---
@@ -198,7 +258,7 @@ async function main() {
 
     if (isNaN(requestedCount) || requestedCount <= 0) {
         console.error('Error: Please provide a valid number as a command-line argument.');
-        console.log('Usage: node generateTollFile.js 10');
+        console.log('Usage: node TCA.js 10');
         process.exit(1);
     }
     console.log(`Requested to generate ${requestedCount} toll records.`);
@@ -211,10 +271,10 @@ async function main() {
         console.log('Database client acquired.');
 
         // 2. Fetch data
-        const plates = await fetchLicensePlates(client);
+        const agreementData = await fetchAgreementData(client);
 
         // 3. Generate file (pass the requested count)
-        generateTollFile(plates, requestedCount);
+        generateTollFile(agreementData, requestedCount);
 
     } catch (err) {
         console.error('An error occurred during the file generation process:', err);
