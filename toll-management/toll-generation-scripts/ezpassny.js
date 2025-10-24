@@ -3,14 +3,37 @@ const path = require('path');
 const dayjs = require('dayjs');
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
-// --- Toll Location Codes & Toll Amounts ---
-const tollLocations = [
-  { code: 12, toll: 1.25 },
-  { code: 91, toll: 2.50 },
-  { code: 0, toll: 3.05 },
-  { code: 39, toll: 5.60 },
-  { code: 42, toll: 7.65 },
-];
+
+async function getTollLocations(client) {
+
+  const query = `
+    SELECT
+        entry_plaza.plaza_name AS entry_plaza_name,
+        exit_plaza.plaza_name AS exit_plaza_name,
+        (trt.property -> 0 ->> 'video_rate')::numeric AS rate
+    FROM "TollAuthority".toll_rate trt
+    -- Join twice on the plaza table to get names for both entry and exit IDs
+    JOIN "TollAuthority".toll_plaza AS entry_plaza ON trt.entry_plaza_id = entry_plaza.id
+    JOIN "TollAuthority".toll_plaza AS exit_plaza ON trt.exit_plaza_id = exit_plaza.id
+    -- Join to the road table to filter by the correct authority
+    JOIN "TollAuthority".toll_road tr ON entry_plaza.toll_road_id = tr.id
+    WHERE tr.toll_authority_id = 2;
+  `;
+
+  console.log('Fetching E-ZPass NY toll locations from the database...');
+  const { rows } = await client.query(query);
+
+  if (!rows.length) {
+    return [];
+  }
+
+
+  return rows.map(row => ({
+    amount: parseFloat(row.rate),
+    entryPlaza: row.entry_plaza_name,
+    exitPlaza: row.exit_plaza_name,
+  }));
+}
 
 function randomChoice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -19,11 +42,20 @@ function randomChoice(arr) {
 async function main() {
   const count = parseInt(process.argv[2], 10);
   if (!count || count <= 0) {
-    console.error('Please provide a valid record count. Example: node e470.js 20');
+    console.error('Please provide a valid record count. Example: node ezpassny.js 20');
     process.exit(1);
   }
 
   const client = await getDbClient();
+  const tollLocations = await getTollLocations(client);
+
+  if (tollLocations.length === 0) {
+    console.error('No E-ZPass NY toll locations found. Aborting.');
+    await closeDbClient();
+    process.exit(1);
+  }
+  console.log(`Successfully fetched ${tollLocations.length} unique E-ZPass NY locations.`);
+
   const sqlFilePath = path.join(__dirname, '../SQL/Active_fleet_RA.sql');
   let query;
   try {
@@ -40,80 +72,69 @@ async function main() {
     process.exit(2);
   }
 
-  const outputDir = path.join(__dirname, '../generated-toll-files/e470');
+  const outputDir = path.join(__dirname, '../generated-toll-files/ezpassny');
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
   const now = dayjs();
-  const currentHHmmss = { hour: now.hour(), minute: now.minute(), second: now.second() };
-  const fileName = `E470_${now.format('YYYYMMDDHHmmss')}.txt`;
+  const fileName = `ezpassny-toll-${now.format('YYYYMMDDHHmmss')}.csv`;
   const outputPath = path.join(outputDir, fileName);
 
-  const direction = 'D';
-  const typeCode = 1;
-
   const lines = [];
-  let totalToll = 0;
-  let totalAmount = 0;
+  const header = 'Lane Txn ID,Tag/Plate #,Posted Date,Agency,Entry Plaza,Exit Plaza,Class,Date,Time,Amount,Post Txn Balance';
+  lines.push(header);
 
   for (let i = 0; i < Math.min(count, rows.length); i++) {
     const row = rows[i];
     const checkout = dayjs(row.checkout_datetime);
+    const location = randomChoice(tollLocations);
 
-    // Transaction date = checkout + 1 day
-    let transactionDate = checkout.add(1, 'day')
-      .hour(currentHHmmss.hour)
-      .minute(currentHHmmss.minute)
-      .second(currentHHmmss.second);
+    const transactionDate = checkout.add(1, 'day')
+        .hour(now.hour())
+        .minute(now.minute())
+        .second(now.second());
 
-    // Ensure transaction date is never in the future
-    const yesterday = dayjs().subtract(1, 'day');
-    if (transactionDate.isAfter(yesterday)) {
-      transactionDate = yesterday.hour(23).minute(59).second(59);
-    }
+    const postedDate = transactionDate.subtract(1, 'day');
 
-    // Posted date = transactionDate - 2 days
-    const postedDate = transactionDate.subtract(2, 'day');
+    const laneTxnId = 12121 + i;
+    const tagPlate = `${row.license_plate_number}-${row.license_plate_state}`;
+    const agency = 'E-ZPass NY';
 
-    const loc = randomChoice(tollLocations);
-    const total = (loc.toll + (Math.random() * 5 + 1)).toFixed(2); // random total
-
-    totalToll += loc.toll;
-    totalAmount += parseFloat(total);
+    const entryPlaza = location.entryPlaza;
+    const exitPlaza = location.exitPlaza;
+    const vehicleClass = '';
+    const dateStr = transactionDate.format('YYYYMMDD');
+    const timeStr = transactionDate.format('HHmmss');
+    const amount = location.amount.toFixed(2);
+    const postTxnBalance = '1';
 
     lines.push([
-      row.license_plate_state,
-      row.license_plate_number,
-      transactionDate.format('YYYYMMDD-HHmmss'),
-      loc.code,
-      typeCode,
-      postedDate.format('YYYYMMDD-HHmmss'),
-      direction,
-      loc.toll.toFixed(2),
-      total
+      laneTxnId,
+      tagPlate,
+      postedDate.format('YYYYMMDD'),
+      agency,
+      entryPlaza,
+      exitPlaza,
+      vehicleClass,
+      dateStr,
+      timeStr,
+      amount,
+      postTxnBalance,
     ].join(','));
   }
 
-  // Add trailer record (ST01)
-  lines.push([
-    'ST01',
-    lines.length,
-    totalToll.toFixed(2),
-    totalAmount.toFixed(2)
-  ].join(','));
-
   fs.writeFileSync(outputPath, lines.join('\n'), 'utf8');
 
-  console.log('✅ E470 Toll file generated successfully!');
-  console.log(`📁 Location: ${outputPath}`);
-  console.log(`🧾 Total records: ${lines.length - 1}`);
-  console.log(`💲 Total Toll: ${totalToll.toFixed(2)}, Total Amount: ${totalAmount.toFixed(2)}`);
+  console.log('E-ZPass NY Toll file generated successfully!');
+  console.log(`Location: ${outputPath}`);
+  console.log(`Total records (excluding header): ${lines.length - 1}`);
 
   await closeDbClient();
   process.exit(0);
 }
 
 main().catch(async (err) => {
-  console.error('❌ Error generating E470 file:', err);
+  console.error('❌ Error generating E-ZPass NY file:', err);
   await closeDbClient();
   process.exit(1);
 });
+

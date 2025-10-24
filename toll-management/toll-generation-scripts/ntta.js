@@ -3,17 +3,41 @@ const path = require('path');
 const dayjs = require('dayjs');
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
-// --- Sample toll locations ---
-const tollLocations = [
-  { toll: 205, road: 'Mountain Creek Lake Bridge', plaza: 'MainLnP1', lane: '5' },
-  { toll: 1500, road: 'Addison Airport Toll Tunnel', plaza: 'AATl', lane: '5' },
-  { toll: 300, road: 'CTP', plaza: 'FM917', lane: 'SPARD-5' },
-  { toll: 400, road: 'CTP', plaza: 'CR913', lane: 'MLG3-5' },
-  { toll: 1500, road: 'AATT', plaza: 'AATT', lane: '5' },
-  { toll: 1000, road: 'MCLB', plaza: 'MCLB', lane: '5' },
-  { toll: 1500, road: 'AATT', plaza: 'Unmatched', lane: '5' },
-  { toll: 1500, road: 'AATT', plaza: 'AATT', lane: '5' },
-];
+// --- ADDED: Function to fetch toll locations from the database ---
+async function getTollLocations(client) {
+  // This query is updated to correctly extract 'video_rate' from the JSON properties column.
+  const query = `
+    SELECT 
+        tr.toll_road_name,
+        tp.plaza_name,
+        v.variation_name,
+        -- This line now correctly accesses the JSON data using the singular 'property'
+        (trt.property -> 0 ->> 'video_rate')::numeric AS rate
+    FROM "TollAuthority".toll_plaza tp
+    JOIN "TollAuthority".variations v ON v.toll_plaza_id = tp.id
+    JOIN "TollAuthority".toll_road tr ON tp.toll_road_id = tr.id
+    JOIN "TollAuthority".toll_rate trt ON trt.toll_road_id = tr.id AND trt.exit_plaza_id = tp.id
+    WHERE tr.toll_authority_id = 1
+      // AND LENGTH(v.variation_name) <= 6
+      AND v.variation_name NOT IN ('PANYNJ', 'NYSTA', 'TBTA');
+  `;
+
+  console.log('Fetching toll locations from the database...');
+  const { rows } = await client.query(query);
+
+  if (!rows.length) {
+    return []; // Return an empty array if no locations are found
+  }
+
+  // Map the database results to the format your script needs
+  return rows.map(row => ({
+    // Assuming the rate is in dollars (e.g., 16.06) and needs to be in cents (1606).
+    toll: Math.round(row.rate * 100), 
+    road: row.toll_road_name,
+    plaza: row.plaza_name,
+    lane: row.variation_name
+  }));
+}
 
 // --- Helper ---
 function randomChoice(arr) {
@@ -28,6 +52,17 @@ async function main() {
   }
 
   const client = await getDbClient();
+
+  // --- MODIFIED: Fetch toll locations dynamically instead of using a hardcoded array ---
+  const tollLocations = await getTollLocations(client);
+
+  if (tollLocations.length === 0) {
+      console.error('No toll locations found in the database. Aborting.');
+      await closeDbClient();
+      process.exit(1);
+  }
+  console.log(`Successfully fetched ${tollLocations.length} unique toll locations.`);
+  // --- END MODIFICATION ---
 
   const sqlFilePath = path.join(__dirname, '../SQL/Active_fleet_RA.sql');
   let query;
@@ -103,3 +138,4 @@ main().catch(async (err) => {
   await closeDbClient();
   process.exit(1);
 });
+
