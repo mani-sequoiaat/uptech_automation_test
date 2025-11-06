@@ -18,7 +18,7 @@ async function getTollLocations(client) {
     JOIN "TollAuthority".toll_road tr ON tp.toll_road_id = tr.id
     JOIN "TollAuthority".toll_rate trt ON trt.toll_road_id = tr.id AND trt.exit_plaza_id = tp.id
     WHERE tr.toll_authority_id = 1
-      // AND LENGTH(v.variation_name) <= 6
+      AND LENGTH(v.variation_name) <= 6
       AND v.variation_name NOT IN ('PANYNJ', 'NYSTA', 'TBTA');
   `;
 
@@ -125,9 +125,8 @@ async function main() {
 
   fs.writeFileSync(outputPath, lines.join('\n'), 'utf8');
 
-  console.log('NTTA ASCII file generated successfully!');
-  console.log(`Location: ${outputPath}`);
-  console.log(`Total records: ${lines.length - 1}`);
+  console.log('NTTA file generated successfully!');
+
 
   await closeDbClient();
   process.exit(0);

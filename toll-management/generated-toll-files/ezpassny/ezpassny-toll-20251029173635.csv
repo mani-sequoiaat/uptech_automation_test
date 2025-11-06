@@ -1,0 +1,11 @@
+Lane Txn ID,Tag/Plate #,Posted Date,Agency,Entry Plaza,Exit Plaza,Class,Date,Time,Amount,Post Txn Balance
+12121,ADO0067-KS,20250928,E-ZPass NY,George Washington Bridge,Outerbridge,,20250929,173635,14.06,1
+12122,ADO0068-KY,20250928,E-ZPass NY,Lincoln Tunnel,George Washington Bridge,,20250929,173635,18.72,1
+12123,ADO0072-MA,20250928,E-ZPass NY,Lincoln Tunnel,George Washington Bridge,,20250929,173635,18.72,1
+12124,AEZ0021-MA,20250923,E-ZPass NY,George Washington Bridge,Outerbridge,,20250924,173635,14.06,1
+12125,AEZ0022-MI,20250923,E-ZPass NY,George Washington Bridge,Outerbridge,,20250924,173635,14.06,1
+12126,AEZ0023-MN,20250923,E-ZPass NY,TestEnPEZNY,TestExPEZNY,,20250924,173635,NaN,1
+12127,AEZ0024-MS,20250923,E-ZPass NY,Holland Tunnel,George Washington Bridge,,20250924,173635,18.06,1
+12128,AEZ0025-MO,20250923,E-ZPass NY,Holland Tunnel,Lincoln Tunnel,,20250924,173635,16.06,1
+12129,AEZ0026-MT,20250923,E-ZPass NY,Lincoln Tunnel,George Washington Bridge,,20250924,173635,18.72,1
+12130,AEZ0027-NE,20250923,E-ZPass NY,Lincoln Tunnel,George Washington Bridge,,20250924,173635,18.72,1

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const dayjs = require('dayjs'); // <-- ADDED DAYJS
+const dayjs = require('dayjs');
 const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 const outputDir = path.join(__dirname, '../generated-toll-files/tca');
 const sqlFilePath = path.join(__dirname, '../SQL/Active_fleet_RA.sql');
@@ -24,12 +24,12 @@ async function fetchAgreementData(client) {
         const res = await client.query(sqlQuery);
         console.log(`Fetched ${res.rows.length} records.`);
         
-        // --- UPDATED: Map all required fields ---
+
         const agreementData = res.rows.map(row => ({
             plate: row.license_plate_number,
             state: row.license_plate_state,
-            checkout_datetime: row.checkout_datetime, // <-- Required for date logic
-            estimated_checkin_datetime: row.estimated_checkin_datetime // <-- Required for date logic
+            checkout_datetime: row.checkout_datetime, 
+            estimated_checkin_datetime: row.estimated_checkin_datetime
         }));
         
         return agreementData;
@@ -50,14 +50,14 @@ function padLeft(str, length, char = '0') {
     return String(str).padStart(length, char);
 }
 
-function getMMDDYYYY(date) { // Accepts a JS Date object
+function getMMDDYYYY(date) { 
     const mm = padLeft(date.getMonth() + 1, 2);
     const dd = padLeft(date.getDate(), 2);
     const yyyy = date.getFullYear();
     return `${mm}${dd}${yyyy}`;
 }
 
-function getHHMMSS(date) { // Accepts a JS Date object
+function getHHMMSS(date) { 
     const hh = padLeft(date.getHours(), 2);
     const mm = padLeft(date.getMinutes(), 2);
     const ss = padLeft(date.getSeconds(), 2);
@@ -112,7 +112,7 @@ function createHeader(fileName, transmissionDate) {
  * @returns {string|null} The formatted Detail record, or null if logic fails.
  */
 function createDetailRecord(agreementData) {
-    // --- NEW DATE LOGIC ---
+
     const checkoutDate = dayjs(agreementData.checkout_datetime);
     const estimatedCheckinDate = dayjs(agreementData.estimated_checkin_datetime);
     const today = dayjs();
@@ -121,7 +121,6 @@ function createDetailRecord(agreementData) {
     const minDate = checkoutDate; 
     
     // End date must be *before* estimated check-in OR *before* today,
-    // whichever is earlier.
     const maxDate = estimatedCheckinDate.isBefore(today) ? estimatedCheckinDate : today;
 
     // Check for an invalid date range
@@ -135,7 +134,7 @@ function createDetailRecord(agreementData) {
     const randomTollDateTime = getRandomDateBetween(minDate, maxDate);
     const tollDate = getMMDDYYYY(randomTollDateTime.toDate());
     const tollTime = getHHMMSS(randomTollDateTime.toDate());
-    // --- END NEW DATE LOGIC ---
+
 
     const randomToll = tollLocations[getRandomInt(0, tollLocations.length - 1)];
     const tollAmount = padLeft(getRandomInt(50, 1500), 6); // $0.50 to $15.00
@@ -177,14 +176,15 @@ function generateTollFile(agreementDataList, requestedCount) {
     // --- UPDATED: Check available records vs. requested count ---
     if (agreementDataList.length < requestedCount) {
         console.warn(`Warning: Requested ${requestedCount} records, but only ${agreementDataList.length} eligible agreements found.`);
-        // We *don't* change the requestedCount, as the loop below will handle it.
+
     }
 
     const now = new Date();
+    const dayjsNow = dayjs(now); 
     const transmissionDate = getMMDDYYYY(now);
     const transmissionTime = getHHMMSS(now);
-    const fileName = `tcue_${transmissionDate}_${transmissionTime}.tol`;
-
+    const fileNameDate = dayjsNow.format('YYYYMMDD');
+    const fileName = `tcue_${fileNameDate}_${transmissionTime}.tol`;
     const fileContent = [];
 
     // 1. Create Header
@@ -199,8 +199,7 @@ function generateTollFile(agreementDataList, requestedCount) {
 
     while (recordsGenerated < requestedCount && agreementIndex < agreementDataList.length) {
         const agreement = agreementDataList[agreementIndex];
-        agreementIndex++; // Move to next agreement
-
+        agreementIndex++; 
         const detailRecord = createDetailRecord(agreement);
         
         if (detailRecord) {

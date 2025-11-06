@@ -1,92 +1,92 @@
 [
   {
-    "license_plate_number": "AGB0081",
+    "license_plate_number": "AGQ0081",
     "license_plate_state": "NM",
-    "year": "2026",
-    "make": "Kia",
-    "model": "Volt",
+    "year": "2023",
+    "make": "Citroën",
+    "model": "A4",
     "color": "delta",
-    "vin": "CJ2T5MMS2NZR17366"
+    "vin": "74UZGLKANVUV75103"
   },
   {
-    "license_plate_number": "AGB0082",
+    "license_plate_number": "AGQ0082",
     "license_plate_state": "NY",
-    "year": "2025",
+    "year": "2024",
     "make": "Polestar",
-    "model": "Model Y",
+    "model": "Jetta",
     "color": "delta",
-    "vin": "XZZANNT2VPC848698"
+    "vin": "1MTB3Z2A48FN67568"
   },
   {
-    "license_plate_number": "AGB0083",
+    "license_plate_number": "AGQ0083",
     "license_plate_state": "NC",
-    "year": "2025",
-    "make": "Mahindra & Mahindra",
-    "model": "V90",
+    "year": "2024",
+    "make": "Ferrari",
+    "model": "Charger",
     "color": "delta",
-    "vin": "YXJHYSDNYCFY29810"
+    "vin": "1468A4846EAA01729"
   },
   {
-    "license_plate_number": "AGB0084",
+    "license_plate_number": "AGQ0084",
     "license_plate_state": "ND",
-    "year": "2026",
-    "make": "Nissan",
-    "model": "Countach",
+    "year": "2023",
+    "make": "Chevrolet",
+    "model": "Impala",
     "color": "delta",
-    "vin": "YHT4T54X12DT98768"
+    "vin": "N2NC5XE3H0M435030"
   },
   {
-    "license_plate_number": "AGB0085",
+    "license_plate_number": "AGQ0085",
     "license_plate_state": "OH",
-    "year": "2025",
-    "make": "Kia",
-    "model": "911",
+    "year": "2023",
+    "make": "NIO",
+    "model": "Durango",
     "color": "delta",
-    "vin": "1PHXCVUSZ6U559623"
+    "vin": "B31JT02VVBJ521201"
   },
   {
-    "license_plate_number": "AGB0086",
+    "license_plate_number": "AGQ0086",
     "license_plate_state": "OK",
-    "year": "2025",
-    "make": "Toyota",
-    "model": "Colorado",
+    "year": "2023",
+    "make": "Maruti",
+    "model": "Grand Cherokee",
     "color": "delta",
-    "vin": "YP5XA767U0RZ88557"
+    "vin": "YF5DZ3RX30BF68023"
   },
   {
-    "license_plate_number": "AGB0087",
+    "license_plate_number": "AGQ0087",
     "license_plate_state": "OR",
     "year": "2024",
-    "make": "Porsche",
-    "model": "Element",
+    "make": "Rolls Royce",
+    "model": "F-150",
     "color": "delta",
-    "vin": "HR133Z3M8CMH78429"
+    "vin": "3RUR9G78EGGU44502"
   },
   {
-    "license_plate_number": "AGB0088",
+    "license_plate_number": "AGQ0088",
     "license_plate_state": "PA",
-    "year": "2025",
-    "make": "Aston Martin",
-    "model": "Expedition",
+    "year": "2023",
+    "make": "Tesla",
+    "model": "Corvette",
     "color": "delta",
-    "vin": "6T95JFC6XBSR65045"
+    "vin": "E405V2MRS1Z091373"
   },
   {
-    "license_plate_number": "AGB0089",
+    "license_plate_number": "AGQ0089",
     "license_plate_state": "RI",
-    "year": "2025",
-    "make": "Nissan",
-    "model": "Escalade",
+    "year": "2023",
+    "make": "Rivian",
+    "model": "Model X",
     "color": "delta",
-    "vin": "SY9H01GKV2TF88804"
+    "vin": "T47YD33G24BR93851"
   },
   {
-    "license_plate_number": "AGB0090",
+    "license_plate_number": "AGQ0090",
     "license_plate_state": "SC",
-    "year": "2026",
-    "make": "Porsche",
-    "model": "Malibu",
+    "year": "2024",
+    "make": "Cadillac",
+    "model": "Aventador",
     "color": "delta",
-    "vin": "XLR13RTJUKG193526"
+    "vin": "5F8KD6LXR6MR97416"
   }
 ]

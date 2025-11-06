@@ -5,11 +5,9 @@ const { getDbClient, closeDbClient } = require('../../utils/dbClient');
 
 // --- Toll Location Codes & Toll Amounts ---
 const tollLocations = [
-  { code: 12, toll: 1.25 },
-  { code: 91, toll: 2.50 },
+  { code: 254, toll: 1.25 },
   { code: 0, toll: 3.05 },
-  { code: 39, toll: 5.60 },
-  { code: 42, toll: 7.65 },
+  { code: 16, toll: 1.25 },
 ];
 
 function randomChoice(arr) {
@@ -102,9 +100,6 @@ async function main() {
   fs.writeFileSync(outputPath, lines.join('\n'), 'utf8');
 
   console.log(' E470 Toll file generated successfully!');
-  console.log(` Location: ${outputPath}`);
-  console.log(` Total records: ${lines.length - 1}`);
-  console.log(` Total Toll: ${totalToll.toFixed(2)}, Total Amount: ${totalAmount.toFixed(2)}`);
 
   await closeDbClient();
   process.exit(0);
